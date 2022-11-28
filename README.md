@@ -48,3 +48,6 @@ Peran user:
 User dapat berbagi ide, tips, dan melakukan tanya jawab dengan user lain.
 Peran user:
 - User dapat membuat post baru dan mereply user lain.
+
+## Alur Pengintegrasian
+Aplikasi mobile akan menggunakan bantuan server Django tugas kelompok tengah semester sebelumnya. Dengan kata lain, Flutter app yang kami buat akan melakukan HTTP request seperti GET dan POST ke server Django yang sudah kami buat sebelumnya untuk mendukung fitur-fitur yang ada. Contohnya, fitur like project tetap akan melakukan POST request ke server Django sama seperti tugas tengah semester.
