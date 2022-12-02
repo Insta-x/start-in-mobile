@@ -1,3 +1,5 @@
+import 'package:start_in_mobile/main.dart';
+import 'package:start_in_mobile/projects/projects.dart';
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/inforum.dart';
 
@@ -30,6 +32,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const InForum()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('StartIn'),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const ProjectsPage()),
               );
             },
           ),
