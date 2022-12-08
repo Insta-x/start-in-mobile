@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:start_in_mobile/drawer.dart';
+import 'package:start_in_mobile/widgets/drawer.dart';
 
 void main() {
   runApp(const MyApp());
