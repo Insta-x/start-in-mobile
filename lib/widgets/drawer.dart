@@ -1,3 +1,4 @@
+import 'package:start_in_mobile/pages/courses/courses.dart';
 import 'package:start_in_mobile/pages/projects/projects.dart';
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
@@ -41,6 +42,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const ProjectsPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Courses'),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Courses()),
               );
             },
           ),
