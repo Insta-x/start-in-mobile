@@ -48,6 +48,7 @@ class _InForumState extends State<InForum> {
                           );
                         } else {
                           return ListView.builder(
+                              
                               itemCount: snapshot.data!.length,
                               itemBuilder: (_, index) => InkWell(
                                   onTap: () {
@@ -59,8 +60,8 @@ class _InForumState extends State<InForum> {
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(
-                                        horizontal: 6, vertical: 8),
-                                    padding: const EdgeInsets.all(10.0),
+                                        horizontal: 10, vertical: 8),
+                                    padding: const EdgeInsets.all(15.0),
                                     decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(
