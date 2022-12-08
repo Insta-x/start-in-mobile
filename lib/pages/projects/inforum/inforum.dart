@@ -1,7 +1,5 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
-import 'package:start_in_mobile/drawer.dart';
+import 'package:start_in_mobile/widgets/drawer.dart';
 
 class InForum extends StatefulWidget {
   const InForum({super.key});
@@ -20,9 +18,9 @@ class _InForumState extends State<InForum> {
           ),
           backgroundColor: Color.fromARGB(255, 146, 232, 176),
         ),
-        drawer: AppDrawer(),
+        drawer: const  AppDrawer(),
         body: SingleChildScrollView(
-          child: Container(
+          child:  SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
               children:  [
