@@ -1,7 +1,6 @@
-import 'package:start_in_mobile/main.dart';
-import 'package:start_in_mobile/projects/projects.dart';
+import 'package:start_in_mobile/pages/projects/projects.dart';
 import 'package:flutter/material.dart';
-import 'package:start_in_mobile/inforum.dart';
+import 'package:start_in_mobile/pages/projects/inforum/inforum.dart';
 
 
 class AppDrawer extends StatefulWidget {
