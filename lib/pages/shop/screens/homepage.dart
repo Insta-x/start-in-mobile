@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/shop/widgets/all_products.dart';
+import 'package:start_in_mobile/widgets/drawer.dart';
 import '../widgets/category.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: const AppDrawer(),
       appBar: AppBar(
-        title: Text("StartIn Shop"),
+        title: const Text("StartIn Shop"),
       ),
-      body: ListView(
-        children: <Widget>[
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+        children: const <Widget>[
           SizedBox(
             height: 10,
           ),
@@ -30,9 +36,12 @@ class HomePage extends StatelessWidget {
             ),
           ),
           // Memasukkan widgets products
-          SizedBox(height: 100, width: 100, child: ProductsPage())
+          Expanded(
+            child: ProductsPage(),
+          )
         ],
       ),
+      )
     );
   }
 }
