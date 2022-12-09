@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_card.dart';
@@ -39,6 +41,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
@@ -51,7 +55,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
       ),
       drawer: AppDrawer(),
       body: FutureBuilder<List<Project>>(
-        future: fetchProjects(''),
+        future: fetchProjects(request, ''),
         builder: (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
           List<Widget> children;
           if (snapshot.hasData) {
