@@ -1,5 +1,5 @@
-import '../models/fetch_products.dart';
-import '../models/products.dart';
+import '../../../queries/fetch_products.dart';
+import '../../../models/products.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import '../screens/product_detail.dart';
 import 'package:flutter/material.dart';
