@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
-import 'package:flutter/material.dart';
-import 'package:start_in_mobile/widgets/project_card.dart';
+import 'package:start_in_mobile/pages/projects/widgets/project_card.dart';
+import 'package:start_in_mobile/queries/fetch_projects.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -11,30 +12,30 @@ class ProjectsPage extends StatefulWidget {
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
-  List<Project> dummyProjects = [
-    Project(
-        username: 'username',
-        timeCreated: DateTime.parse('2022-12-09'),
-        title: 'title',
-        description: 'description',
-        donationTarget: 100,
-        currentDonation: 10,
-        likeCount: 1,
-        isPublished: true,
-        isDone: false,
-        isLiked: true),
-    Project(
-        username: 'username2',
-        timeCreated: DateTime.parse('2022-12-10'),
-        title: 'title2',
-        description: 'description',
-        donationTarget: 100,
-        currentDonation: 10,
-        likeCount: 1,
-        isPublished: true,
-        isDone: false,
-        isLiked: true)
-  ];
+  // List<Project> dummyProjects = [
+  //   Project(
+  //       username: 'username',
+  //       timeCreated: DateTime.parse('2022-12-09'),
+  //       title: 'title',
+  //       description: 'description',
+  //       donationTarget: 100,
+  //       currentDonation: 10,
+  //       likeCount: 1,
+  //       isPublished: true,
+  //       isDone: false,
+  //       isLiked: true),
+  //   Project(
+  //       username: 'username2',
+  //       timeCreated: DateTime.parse('2022-12-10'),
+  //       title: 'title2',
+  //       description: 'description',
+  //       donationTarget: 100,
+  //       currentDonation: 10,
+  //       likeCount: 1,
+  //       isPublished: true,
+  //       isDone: false,
+  //       isLiked: true)
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +50,55 @@ class _ProjectsPageState extends State<ProjectsPage> {
         ],
       ),
       drawer: AppDrawer(),
-      body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-          child: Column(
-            children: dummyProjects
+      body: FutureBuilder<List<Project>>(
+        future: fetchProjects(''),
+        builder: (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
+          List<Widget> children;
+          if (snapshot.hasData) {
+            children = snapshot.data!
                 .map((project) => ProjectCard(project: project))
-                .toList(),
-          )),
+                .toList();
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            ];
+          } else {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Retriving Data...'),
+                  ),
+                ],
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: Column(
+                children: children,
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }

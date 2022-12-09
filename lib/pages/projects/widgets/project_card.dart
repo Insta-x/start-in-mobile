@@ -1,5 +1,6 @@
-import 'package:start_in_mobile/models/project.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:start_in_mobile/models/project.dart';
 
 class ProjectCard extends StatefulWidget {
   Project project;
@@ -11,6 +12,13 @@ class ProjectCard extends StatefulWidget {
 
 class _ProjectCardState extends State<ProjectCard> {
   bool isLiked = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    isLiked = widget.project.isLiked;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +35,27 @@ class _ProjectCardState extends State<ProjectCard> {
                   children: [
                     Text(
                       widget.project.title,
-                      style: const TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 24),
                     ),
                     Text(
                       widget.project.username,
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 118, 118, 118)),
                     ),
                     Text(
-                      '${widget.project.timeCreated}',
-                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                      DateFormat.yMMMMd('en_US')
+                          .format(widget.project.timeCreated),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 118, 118, 118)),
                     )
                   ],
                 ),
-                TextButton(onPressed: () {}, child: const Text('Like'))
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.thumb_up_outlined),
+                )
               ],
             ),
           ],
