@@ -19,7 +19,7 @@ Future<List<Project>> fetchProjects(String searchQuery) async {
 
   for (var project in responseData) {
     if (project != null) {
-      projectList.add(Project.fromJson(project['fields']));
+      projectList.add(Project.fromJson(project));
     }
   }
 

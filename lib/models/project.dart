@@ -1,4 +1,5 @@
 class Project {
+  final int id;
   final String username;
   final DateTime timeCreated;
   final String title;
@@ -11,6 +12,7 @@ class Project {
   final bool isLiked;
 
   const Project({
+    required this.id,
     required this.username,
     required this.timeCreated,
     required this.title,
@@ -25,16 +27,17 @@ class Project {
 
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
-      username: json['owner_username'],
-      timeCreated: DateTime.parse(json['time_created']),
-      title: json['title'],
-      description: json['description'],
-      donationTarget: json['donation_target'],
-      currentDonation: json['current_donation'],
-      likeCount: json['like_count'],
-      isPublished: json['is_published'],
-      isDone: json['is_done'],
-      isLiked: json['is_liked'],
+      id: json['pk'],
+      username: json['fields']['owner_username'],
+      timeCreated: DateTime.parse(json['fields']['time_created']),
+      title: json['fields']['title'],
+      description: json['fields']['description'],
+      donationTarget: json['fields']['donation_target'],
+      currentDonation: json['fields']['current_donation'],
+      likeCount: json['fields']['like_count'],
+      isPublished: json['fields']['is_published'],
+      isDone: json['fields']['is_done'],
+      isLiked: json['fields']['is_liked'],
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
 
 class ProjectCard extends StatefulWidget {
   Project project;
@@ -52,10 +53,11 @@ class _ProjectCardState extends State<ProjectCard> {
                     )
                   ],
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.thumb_up_outlined),
-                )
+                ProjectLikeButton(
+                  projectId: widget.project.id,
+                  likeCount: widget.project.likeCount,
+                  isLiked: widget.project.isLiked,
+                ),
               ],
             ),
           ],
