@@ -2,21 +2,24 @@ import 'package:flutter/material.dart';
 import 'category_card.dart';
 
 class Category extends StatelessWidget {
+
+  const Category({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 220,
       child: ListView(
         scrollDirection: Axis.vertical,
-        children: <Widget>[
+        children:  <Widget>[
           CategoryCard(
-              Icon(
+              const Icon(
                 Icons.discount,
                 size: 40,
               ),
               'Clothing'),
           CategoryCard(
-              Icon(
+              const Icon(
                 Icons.watch,
                 size: 40,
               ),
