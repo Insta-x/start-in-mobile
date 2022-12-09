@@ -1,5 +1,7 @@
+import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:start_in_mobile/widgets/project_card.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -9,58 +11,51 @@ class ProjectsPage extends StatefulWidget {
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
+  List<Project> dummyProjects = [
+    Project(
+        username: 'username',
+        timeCreated: DateTime.parse('2022-12-09'),
+        title: 'title',
+        description: 'description',
+        donationTarget: 100,
+        currentDonation: 10,
+        likeCount: 1,
+        isPublished: true,
+        isDone: false,
+        isLiked: true),
+    Project(
+        username: 'username2',
+        timeCreated: DateTime.parse('2022-12-10'),
+        title: 'title2',
+        description: 'description',
+        donationTarget: 100,
+        currentDonation: 10,
+        likeCount: 1,
+        isPublished: true,
+        isDone: false,
+        isLiked: true)
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Watch List'),
+        title: const Text('Projects'),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: ProjectsSearchDelegate());
-            },
+            onPressed: () {},
           )
         ],
       ),
       drawer: AppDrawer(),
-      body: Column(),
+      body: Container(
+          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          child: Column(
+            children: dummyProjects
+                .map((project) => ProjectCard(project: project))
+                .toList(),
+          )),
     );
-  }
-}
-
-class ProjectsSearchDelegate extends SearchDelegate {
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => close(context, null),
-      );
-
-  @override
-  List<Widget>? buildActions(BuildContext context) => [
-        IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            if (query.isEmpty) {
-              close(context, null);
-            } else {
-              query = '';
-            }
-          },
-        ),
-      ];
-
-  @override
-  Widget buildResults(BuildContext context) => Center(
-        child: Text(
-          query,
-          style: const TextStyle(fontSize: 64),
-        ),
-      );
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
   }
 }

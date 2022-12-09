@@ -26,7 +26,7 @@ class Project {
   factory Project.fromJson(Map<String, dynamic> json) {
     return Project(
       username: json['owner_username'],
-      timeCreated: json['time_created'],
+      timeCreated: DateTime.parse(json['time_created']),
       title: json['title'],
       description: json['description'],
       donationTarget: json['donation_target'],
