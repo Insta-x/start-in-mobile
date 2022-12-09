@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 
+
 class Courses extends StatefulWidget {
   const Courses({super.key});
 
@@ -9,34 +10,6 @@ class Courses extends StatefulWidget {
 }
 
 class _CoursesState extends State<Courses> {
-
-  // @override
-  // void initState() {
-  //   Future<List<WatchList>> fetchWatchList() async {
-  //     var url =
-  //         Uri.parse('https://start-in.up.railway.app/courses/json');
-  //     var response = await http.get(
-  //       url,
-  //     );
-  //     var data = jsonDecode(utf8.decode(response.bodyBytes));
-  //     print(data);
-
-  //     List<WatchList> listToDo = [];
-  //     for (var d in data) {
-  //       if (d != null) {
-  //         listToDo.add(WatchList.fromJson(d));
-  //       }
-  //     }
-
-  //     return listToDo;
-  //   }
-
-  //   super.initState();
-  //   _remoteDataSource = WatchListRemoteDataSource();
-  //   print(_remoteDataSource);
-  //   _futureWatchList = _remoteDataSource.fetchWatchList();
-  // }
-  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -67,11 +40,7 @@ class _CoursesState extends State<Courses> {
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 32.0)),
-                  ),)
-              Container(width: double.infinity,
-              height: 200.0,
-              decoration:
-                const 
+                  )
               )
             ]   
           ),
