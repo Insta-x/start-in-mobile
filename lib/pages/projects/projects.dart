@@ -1,5 +1,8 @@
-import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/widgets/drawer.dart';
+import 'package:start_in_mobile/pages/projects/widgets/project_card.dart';
+import 'package:start_in_mobile/queries/fetch_projects.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -9,58 +12,93 @@ class ProjectsPage extends StatefulWidget {
 }
 
 class _ProjectsPageState extends State<ProjectsPage> {
+  // List<Project> dummyProjects = [
+  //   Project(
+  //       username: 'username',
+  //       timeCreated: DateTime.parse('2022-12-09'),
+  //       title: 'title',
+  //       description: 'description',
+  //       donationTarget: 100,
+  //       currentDonation: 10,
+  //       likeCount: 1,
+  //       isPublished: true,
+  //       isDone: false,
+  //       isLiked: true),
+  //   Project(
+  //       username: 'username2',
+  //       timeCreated: DateTime.parse('2022-12-10'),
+  //       title: 'title2',
+  //       description: 'description',
+  //       donationTarget: 100,
+  //       currentDonation: 10,
+  //       likeCount: 1,
+  //       isPublished: true,
+  //       isDone: false,
+  //       isLiked: true)
+  // ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Watch List'),
+        title: const Text('Projects'),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: ProjectsSearchDelegate());
-            },
+            onPressed: () {},
           )
         ],
       ),
       drawer: AppDrawer(),
-      body: Column(),
+      body: FutureBuilder<List<Project>>(
+        future: fetchProjects(''),
+        builder: (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
+          List<Widget> children;
+          if (snapshot.hasData) {
+            children = snapshot.data!
+                .map((project) => ProjectCard(project: project))
+                .toList();
+          } else if (snapshot.hasError) {
+            children = <Widget>[
+              const Icon(
+                Icons.error_outline,
+                color: Colors.red,
+                size: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: Text('Error: ${snapshot.error}'),
+              ),
+            ];
+          } else {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const <Widget>[
+                  SizedBox(
+                    width: 60,
+                    height: 60,
+                    child: CircularProgressIndicator(),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text('Retriving Data...'),
+                  ),
+                ],
+              ),
+            );
+          }
+          return SingleChildScrollView(
+            child: Container(
+              margin:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+              child: Column(
+                children: children,
+              ),
+            ),
+          );
+        },
+      ),
     );
-  }
-}
-
-class ProjectsSearchDelegate extends SearchDelegate {
-  @override
-  Widget? buildLeading(BuildContext context) => IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () => close(context, null),
-      );
-
-  @override
-  List<Widget>? buildActions(BuildContext context) => [
-        IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            if (query.isEmpty) {
-              close(context, null);
-            } else {
-              query = '';
-            }
-          },
-        ),
-      ];
-
-  @override
-  Widget buildResults(BuildContext context) => Center(
-        child: Text(
-          query,
-          style: const TextStyle(fontSize: 64),
-        ),
-      );
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
   }
 }
