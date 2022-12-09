@@ -3,16 +3,15 @@ import 'dart:convert';
 import './products.dart';
 
 Future<List<Product>> fetchProducts() async {
-  final response = await http.get(
+  var response = await http.get(
     Uri.parse('https://start-in.up.railway.app/shop/json/'),
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
-      'Accept': '*/*'
     },
   );
 
-  var responseData = jsonDecode(response.body);
+  var responseData = jsonDecode(utf8.decode(response.bodyBytes));
 
   List<Product> products = [];
 
