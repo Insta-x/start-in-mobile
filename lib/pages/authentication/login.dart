@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/queries/auth_login.dart';
 
@@ -98,9 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_loginFormKey.currentState!.validate()) {
-                    login(request, username, password1);
+                    if( await login(request, username, password1)){
+                        Navigator.pushReplacement(context, 
+                        MaterialPageRoute(builder: (context) => const MyHomePage()));
+                    }
                   }
                 },
                 child: const Text(
