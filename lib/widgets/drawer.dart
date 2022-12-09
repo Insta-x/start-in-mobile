@@ -1,7 +1,10 @@
-import 'package:start_in_mobile/pages/projects/projects.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:start_in_mobile/pages/projects/projects.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
+import 'package:start_in_mobile/pages/authentication/login.dart';
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -46,6 +49,17 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ShopPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: Text(
+                context.read<CookieRequest>().loggedIn ? 'Logout' : 'Login'),
+            onTap: () {
+              // Route menu ke halaman Shop
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
           ),
