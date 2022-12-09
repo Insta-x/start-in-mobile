@@ -1,25 +1,18 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 
-Future<List<Project>> fetchProjects(String searchQuery) async {
-  final response = await http.get(
-    Uri.parse(
-        'https://start-in.up.railway.app/projects/get-projects/?search=$searchQuery'),
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "application/json",
-      'Accept': '*/*'
-    },
-  );
-
-  var responseData = jsonDecode(response.body);
+Future<List<Project>> fetchProjects(
+    CookieRequest request, String searchQuery) async {
+  print(request.headers);
+  final responseData = await request.get(
+      'https://start-in.up.railway.app/projects/get-projects/?search=$searchQuery');
 
   List<Project> projectList = [];
 
   for (var project in responseData) {
     if (project != null) {
       projectList.add(Project.fromJson(project));
+      print(project['fields']['is_liked']);
     }
   }
 
