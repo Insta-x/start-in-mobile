@@ -1,6 +1,8 @@
-import 'package:pbp_django_auth/pbp_django_auth.dart';
 
-Future<void> login(
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:flutter/material.dart';
+
+Future<bool> login(
     CookieRequest request, String username, String password) async {
   print(request.cookies);
   final response =
@@ -11,11 +13,9 @@ Future<void> login(
 
   if (request.loggedIn) {
     print('Login Success');
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => const HomePage()),
-    // );
+    return true;
   } else {
     print('Login Failed');
+    return false;
   }
 }
