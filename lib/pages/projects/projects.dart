@@ -86,7 +86,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 16),
-                    child: Text('Retriving Data...'),
+                    child: Text('Retrieving Data...'),
                   ),
                 ],
               ),

@@ -1,10 +1,9 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 
 Future<List<Project>> fetchProjects(
     CookieRequest request, String searchQuery) async {
+  print(request.headers);
   final responseData = await request.get(
       'https://start-in.up.railway.app/projects/get-projects/?search=$searchQuery');
 
