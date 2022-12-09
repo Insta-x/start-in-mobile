@@ -1,30 +1,25 @@
 import 'package:start_in_mobile/pages/projects/projects.dart';
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
-
+import 'package:start_in_mobile/pages/shop/shop.dart';
 
 class AppDrawer extends StatefulWidget {
-
   const AppDrawer({super.key});
 
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
 
-
 class _AppDrawerState extends State<AppDrawer> {
-
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Drawer(
       child: Column(
         children: [
           // Menambahkan clickable menu
           ListTile(
             title: Row(
-              children: const [
-                Text('inforum')
-              ],
+              children: const [Text('inforum')],
             ),
             onTap: () {
               // Route menu ke halaman utama
@@ -41,6 +36,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const ProjectsPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('StartIn Store'),
+            onTap: () {
+              // Route menu ke halaman Shop
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ShopPage()),
               );
             },
           ),
