@@ -41,25 +41,26 @@ class _AppDrawerState extends State<AppDrawer> {
             },
           ),
           ListTile(
-<<<<<<< HEAD
             title: const Text('Courses'),
             onTap: () {
               // Route menu ke halaman utama
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const Courses()),
-=======
+              );
+            },
+          ),
+          ListTile(
             title: const Text('StartIn Store'),
             onTap: () {
               // Route menu ke halaman Shop
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ShopPage()),
->>>>>>> 806594a34ab00cbdf516e3971cf125474434aab7
               );
             },
           ),
-        ],
+        ]
       ),
     );
   }
