@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/pages/projects/create_project.dart';
 import 'package:start_in_mobile/pages/projects/widgets/user_project_card.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
@@ -114,8 +116,23 @@ class _ProjectsPageState extends State<ProjectsPage>
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;
               if (!request.loggedIn) {
-                return const Center(
-                  child: Text('Login to check your projects'),
+                return Center(
+                  child: Text.rich(
+                    TextSpan(
+                      text: 'Login to check your projects',
+                      style: TextStyle(
+                        fontSize: 26.0,
+                        color: Colors.blue,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => LoginPage())));
+                        },
+                    ),
+                  ),
                 );
               }
               if (snapshot.hasData) {

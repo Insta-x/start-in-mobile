@@ -141,18 +141,6 @@ class _UserProjectCardState extends State<UserProjectCard> {
                 ),
               ],
             ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProjectPage(projectId: widget.project.id),
-                  ),
-                );
-              },
-              child: const Text('Read More'),
-            )
           ],
         ),
       ),
