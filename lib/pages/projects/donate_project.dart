@@ -5,16 +5,16 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/queries/projects/donate_project.dart';
 
-class DonatePage extends StatefulWidget {
+class DonateProjectPage extends StatefulWidget {
   final int projectId;
-  const DonatePage({super.key, required this.projectId});
+  const DonateProjectPage({super.key, required this.projectId});
 
   @override
-  State<DonatePage> createState() => _DonatePageState();
+  State<DonateProjectPage> createState() => _DonateProjectPageState();
 }
 
-class _DonatePageState extends State<DonatePage> {
-  final _donateFormKey = GlobalKey<FormState>();
+class _DonateProjectPageState extends State<DonateProjectPage> {
+  final _donateProjectFormKey = GlobalKey<FormState>();
 
   int nominal = 0;
 
@@ -33,7 +33,7 @@ class _DonatePageState extends State<DonatePage> {
         ),
       ),
       body: Form(
-        key: _donateFormKey,
+        key: _donateProjectFormKey,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +83,7 @@ class _DonatePageState extends State<DonatePage> {
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
                 onPressed: () async {
-                  if (_donateFormKey.currentState!.validate()) {
+                  if (_donateProjectFormKey.currentState!.validate()) {
                     await donateProject(request, widget.projectId, nominal)
                         .then((value) => Navigator.pop(context));
                   }

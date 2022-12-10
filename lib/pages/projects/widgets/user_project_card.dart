@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/projects/edit_project.dart';
 import 'package:start_in_mobile/pages/projects/project.dart';
 import 'package:start_in_mobile/pages/projects/projects_home.dart';
-import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
 import 'package:start_in_mobile/queries/projects/delete_project.dart';
 import 'package:start_in_mobile/queries/projects/done_project.dart';
 import 'package:start_in_mobile/queries/projects/publish_project.dart';
@@ -84,7 +84,13 @@ class _UserProjectCardState extends State<UserProjectCard> {
                     Visibility(
                       visible: !widget.project.isPublished,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => EditProjectPage(
+                                      projectId: widget.project.id))));
+                        },
                         child: Text('Edit'),
                       ),
                     ),

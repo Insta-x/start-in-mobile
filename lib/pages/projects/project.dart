@@ -110,7 +110,7 @@ class _ProjectPageState extends State<ProjectPage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => request.loggedIn
-                                          ? DonatePage(
+                                          ? DonateProjectPage(
                                               projectId: snapshot.data!.id)
                                           : const LoginPage(),
                                     ),
