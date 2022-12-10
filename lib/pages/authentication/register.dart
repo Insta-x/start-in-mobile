@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/pages/home.dart';
+import 'package:start_in_mobile/queries/auth_register.dart';
+import 'package:start_in_mobile/util/Register.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/queries/auth_login.dart';
 
@@ -213,8 +215,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               initialDate: DateTime.now(),
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100));
-                              birthDate = dateController.text = date.toString().substring(0, 10).replaceAll('-', '/');
-                              
+                          birthDate = dateController.text =
+                              date.toString().substring(0, 10);
                         },
                         // Menambahkan behavior saat nama diketik
                         onChanged: (String? value) {
@@ -295,7 +297,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         // Validator sebagai validasi form
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
-                            return 'deskripis tidak boleh kosong';
+                            return 'deskripi tidak boleh kosong';
                           }
                           return null;
                         },
@@ -308,12 +310,16 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: const Text('Register'),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
-                              if (await login(request, username, password1)) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MyHomePage()));
+                              RegisterPayload payload = RegisterPayload(
+                                  username: username,
+                                  name: name,
+                                  birth_date: birthDate,
+                                  password1: password1,
+                                  password2: confirmPassword,
+                                  job: job,
+                                  description: desc);
+                              if (await register(request, payload)) {
+                                Navigator.pop(context);
                               }
                             }
                           },
