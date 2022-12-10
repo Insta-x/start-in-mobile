@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/projects/create_project.dart';
 import 'package:start_in_mobile/pages/projects/widgets/user_project_card.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_card.dart';
@@ -113,7 +114,7 @@ class _ProjectsPageState extends State<ProjectsPage>
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;
               if (!request.loggedIn) {
-                return Center(
+                return const Center(
                   child: Text('Login to check your projects'),
                 );
               }
@@ -160,7 +161,32 @@ class _ProjectsPageState extends State<ProjectsPage>
                   margin: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10.0),
                   child: Column(
-                    children: children,
+                    children: [
+                      Center(
+                        child: Column(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: ((context) =>
+                                            CreateProjectPage())));
+                              },
+                              child: Text(
+                                'Create New Project',
+                                style: TextStyle(
+                                  fontSize: 30.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: children,
+                      ),
+                    ],
                   ),
                 ),
               );
