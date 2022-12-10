@@ -4,7 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_card.dart';
-import 'package:start_in_mobile/queries/fetch_projects.dart';
+import 'package:start_in_mobile/queries/projects/fetch_projects.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
