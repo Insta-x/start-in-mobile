@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/projects/project.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
 
 class ProjectCard extends StatefulWidget {
@@ -60,6 +61,17 @@ class _ProjectCardState extends State<ProjectCard> {
                 ),
               ],
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProjectPage(project: widget.project),
+                  ),
+                );
+              },
+              child: const Text('Read More'),
+            )
           ],
         ),
       ),
