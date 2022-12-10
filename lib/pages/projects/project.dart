@@ -57,7 +57,26 @@ class _ProjectPageState extends State<ProjectPage> {
                         style: const TextStyle(
                             fontSize: 18,
                             color: Color.fromARGB(255, 118, 118, 118)),
-                      )
+                      ),
+                      const SizedBox(height: 10.0),
+                      Text.rich(
+                        TextSpan(
+                          text: '${widget.project.currentDonation}',
+                          style: const TextStyle(
+                            fontSize: 16.0,
+                            color: Colors.black,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ' / ${widget.project.donationTarget}',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   ProjectLikeButton(
