@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/authentication/login.dart';
+import 'package:start_in_mobile/pages/projects/donate_project.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
 
@@ -28,6 +30,14 @@ class _ProjectPageState extends State<ProjectPage> {
             Navigator.pop(context);
           },
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // TODO : reload button for project page
+            },
+            icon: const Icon(Icons.replay_outlined),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -79,10 +89,29 @@ class _ProjectPageState extends State<ProjectPage> {
                       ),
                     ],
                   ),
-                  ProjectLikeButton(
-                    projectId: widget.project.id,
-                    likeCount: widget.project.likeCount,
-                    isLiked: widget.project.isLiked,
+                  Column(
+                    children: [
+                      ProjectLikeButton(
+                        projectId: widget.project.id,
+                        likeCount: widget.project.likeCount,
+                        isLiked: widget.project.isLiked,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => request.loggedIn
+                                  ? DonatePage(projectId: widget.project.id)
+                                  : const LoginPage(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          request.loggedIn ? 'Donate' : 'Login to donate',
+                        ),
+                      )
+                    ],
                   ),
                 ],
               ),
