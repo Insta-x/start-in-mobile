@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/pages/projects/projects_home.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
