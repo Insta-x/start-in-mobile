@@ -5,6 +5,7 @@ import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/pages/projects/projects_home.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
+import 'package:start_in_mobile/pages/events/events.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/auth_logout.dart';
 
@@ -53,6 +54,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ShopPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Events'),
+            onTap: () {
+              // Route menu ke halaman events
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Events()),
               );
             },
           ),
