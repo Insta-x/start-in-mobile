@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/models/Forum.dart';
+import 'package:start_in_mobile/queries/post_comment.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/queries/get_all_comment.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class ForumPage extends StatefulWidget {
   Forum data;
@@ -13,8 +16,11 @@ class ForumPage extends StatefulWidget {
 }
 
 class _ForumPageState extends State<ForumPage> {
+  final _commentFormKey = GlobalKey<FormState>();
+  String comment = '';
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
             title: const Text(
@@ -30,6 +36,7 @@ class _ForumPageState extends State<ForumPage> {
             children: [
               Container(
                 padding: const EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
@@ -68,13 +75,68 @@ class _ForumPageState extends State<ForumPage> {
               const SizedBox(height: 12),
               Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 15, bottom: 10),
-                  child: const Text("comments",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Color.fromARGB(248, 26, 27, 32),
-                        fontWeight: FontWeight.bold,
-                      ))),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("comments",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Color.fromARGB(248, 26, 27, 32),
+                              fontWeight: FontWeight.bold,
+                            )),
+                        Form(
+                          key: _commentFormKey,
+                          child: TextFormField(
+                            enabled: request.loggedIn,
+                            decoration: InputDecoration(
+                              hintText: request.loggedIn
+                                  ? "leave a comment"
+                                  : "login to reply",
+                              // Menambahkan circular border agar lebih rapi
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            // Menambahkan behavior saat nama diketik
+                            onChanged: request.loggedIn
+                                ? (String? value) {
+                                    setState(() {
+                                      comment = value!;
+                                    });
+                                  }
+                                : null,
+                            // Menambahkan behavior saat data disimpan
+                            onSaved: request.loggedIn
+                                ? (String? value) {
+                                    print("comment");
+                                    setState(() {
+                                      comment = value!;
+                                    });
+                                  }
+                                : null,
+                            // Validator sebagai validasi form
+                            onFieldSubmitted: (value) => {
+                              if (_commentFormKey.currentState!.validate()){
+                                postComment(request, widget.data.pk, comment),
+                                _commentFormKey.currentState!.reset(),
+                                print('validated')
+                              },
+                              print(' tidak validated')
+                            },
+                            validator: request.loggedIn
+                                ? (String? value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'comment tidak boleh kosong';
+                                    }
+                                    return null;
+                                  }
+                                : null,
+                            
+                          ),
+                        ),
+                      ])),
               Expanded(
                 child: FutureBuilder(
                     future: get_all_comment(widget.data.pk),
@@ -144,7 +206,7 @@ class _ForumPageState extends State<ForumPage> {
                         }
                       }
                     }),
-              )
+              ),
             ],
           ),
         ));
