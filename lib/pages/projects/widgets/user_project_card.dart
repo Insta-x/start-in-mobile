@@ -111,7 +111,8 @@ class _UserProjectCardState extends State<UserProjectCard> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProjectPage(project: widget.project),
+                    builder: (context) =>
+                        ProjectPage(projectId: widget.project.id),
                   ),
                 );
               },

@@ -1,6 +1,14 @@
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 
+Future<Project> fetchProject(CookieRequest request, int projectId) async {
+  print(request.headers);
+  final responseData = await request
+      .get('https://start-in.up.railway.app/projects/api/project/$projectId');
+
+  return Project.fromJson(responseData);
+}
+
 Future<List<Project>> fetchProjects(
     CookieRequest request, String searchQuery) async {
   print(request.headers);
