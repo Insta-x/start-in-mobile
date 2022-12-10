@@ -19,6 +19,11 @@ class ProjectsPage extends StatefulWidget {
 
 class _ProjectsPageState extends State<ProjectsPage>
     with TickerProviderStateMixin {
+  final _searchFormKey = GlobalKey<FormState>();
+  String searchQuery = '';
+
+  Future<List<Project>>? _projects;
+
   late TabController _tabController;
 
   @override
@@ -34,12 +39,6 @@ class _ProjectsPageState extends State<ProjectsPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          )
-        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
@@ -57,7 +56,8 @@ class _ProjectsPageState extends State<ProjectsPage>
         controller: _tabController,
         children: [
           FutureBuilder<List<Project>>(
-            future: fetchProjects(request, ''),
+            initialData: [],
+            future: _projects ?? fetchProjects(request, ''),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;
@@ -104,7 +104,56 @@ class _ProjectsPageState extends State<ProjectsPage>
                   margin: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10.0),
                   child: Column(
-                    children: children,
+                    children: [
+                      Form(
+                        key: _searchFormKey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "Search",
+                                  // Menambahkan circular border agar lebih rapi
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                ),
+                                onChanged: (String? value) {
+                                  searchQuery = value ?? '';
+                                },
+                                onSaved: (String? value) {
+                                  searchQuery = value ?? '';
+                                },
+                                validator: (String? value) {
+                                  return null;
+                                },
+                              ),
+                            ),
+                            TextButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.blue),
+                              ),
+                              onPressed: () async {
+                                if (_searchFormKey.currentState!.validate()) {
+                                  setState(() {
+                                    _projects =
+                                        fetchProjects(request, searchQuery);
+                                  });
+                                }
+                              },
+                              child: const Text(
+                                "Search",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: children,
+                      ),
+                    ],
                   ),
                 ),
               );

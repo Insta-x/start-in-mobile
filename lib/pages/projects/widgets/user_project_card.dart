@@ -29,8 +29,16 @@ class _UserProjectCardState extends State<UserProjectCard> {
     final request = context.watch<CookieRequest>();
 
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // if you need this
+        side: BorderSide(
+          color: widget.project.isDone ? Colors.green : Colors.grey,
+          width: 1,
+        ),
+      ),
+      color: widget.project.isDone ? Colors.lightGreen[50] : Colors.white,
       child: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
         child: Column(
           children: [
             Row(
@@ -91,7 +99,10 @@ class _UserProjectCardState extends State<UserProjectCard> {
                                   builder: ((context) => EditProjectPage(
                                       projectId: widget.project.id))));
                         },
-                        child: Text('Edit'),
+                        child: Text(
+                          'Edit',
+                          style: TextStyle(color: Colors.blue),
+                        ),
                       ),
                     ),
                     Visibility(
@@ -105,7 +116,10 @@ class _UserProjectCardState extends State<UserProjectCard> {
                                 builder: ((context) => ProjectsPage())),
                           );
                         },
-                        child: Text('Publish'),
+                        child: Text(
+                          'Publish',
+                          style: TextStyle(color: Colors.green),
+                        ),
                       ),
                     ),
                     Visibility(
@@ -119,7 +133,10 @@ class _UserProjectCardState extends State<UserProjectCard> {
                                 builder: ((context) => ProjectsPage())),
                           );
                         },
-                        child: Text('Delete'),
+                        child: Text(
+                          'Delete',
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     ),
                     Visibility(
@@ -134,7 +151,10 @@ class _UserProjectCardState extends State<UserProjectCard> {
                                 builder: ((context) => ProjectsPage())),
                           );
                         },
-                        child: Text('Done'),
+                        child: Text(
+                          'Done',
+                          style: TextStyle(color: Colors.green),
+                        ),
                       ),
                     ),
                   ],

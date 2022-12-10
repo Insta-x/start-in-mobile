@@ -2,7 +2,6 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 
 Future<Project> fetchProject(CookieRequest request, int projectId) async {
-  print(request.headers);
   final responseData = await request
       .get('https://start-in.up.railway.app/projects/api/project/$projectId');
 
@@ -11,7 +10,7 @@ Future<Project> fetchProject(CookieRequest request, int projectId) async {
 
 Future<List<Project>> fetchProjects(
     CookieRequest request, String searchQuery) async {
-  print(request.headers);
+  print(searchQuery);
   final responseData = await request.get(
       'https://start-in.up.railway.app/projects/get-projects/?search=$searchQuery');
 
@@ -20,15 +19,15 @@ Future<List<Project>> fetchProjects(
   for (var project in responseData) {
     if (project != null) {
       projectList.add(Project.fromJson(project));
-      print(project['fields']['is_liked']);
     }
   }
+
+  print(projectList);
 
   return projectList;
 }
 
 Future<List<Project>> fetchUserProjects(CookieRequest request) async {
-  print(request.headers);
   final responseData = await request
       .get('https://start-in.up.railway.app/projects/get-user-projects/');
 
@@ -37,7 +36,6 @@ Future<List<Project>> fetchUserProjects(CookieRequest request) async {
   for (var project in responseData) {
     if (project != null) {
       projectList.add(Project.fromJson(project));
-      print(project['fields']['is_liked']);
     }
   }
 

@@ -18,8 +18,6 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  late Project project;
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -48,7 +46,7 @@ class _ProjectPageState extends State<ProjectPage> {
             if (snapshot.hasData) {
               return SingleChildScrollView(
                 child: Container(
-                  margin: const EdgeInsets.all(10.0),
+                  margin: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -104,22 +102,25 @@ class _ProjectPageState extends State<ProjectPage> {
                                 likeCount: snapshot.data!.likeCount,
                                 isLiked: snapshot.data!.isLiked,
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => request.loggedIn
-                                          ? DonateProjectPage(
-                                              projectId: snapshot.data!.id)
-                                          : const LoginPage(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  request.loggedIn
-                                      ? 'Donate'
-                                      : 'Login to donate',
+                              Visibility(
+                                visible: !snapshot.data!.isDone,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => request.loggedIn
+                                            ? DonateProjectPage(
+                                                projectId: snapshot.data!.id)
+                                            : const LoginPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    request.loggedIn
+                                        ? 'Donate'
+                                        : 'Login to donate',
+                                  ),
                                 ),
                               )
                             ],
