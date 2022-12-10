@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/pages/projects/project.dart';
+import 'package:start_in_mobile/pages/projects/projects_home.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
+import 'package:start_in_mobile/queries/projects/delete_project.dart';
+import 'package:start_in_mobile/queries/projects/done_project.dart';
+import 'package:start_in_mobile/queries/projects/publish_project.dart';
 
 class UserProjectCard extends StatefulWidget {
   Project project;
@@ -20,6 +26,8 @@ class _UserProjectCardState extends State<UserProjectCard> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Card(
       child: Container(
         padding: const EdgeInsets.all(10.0),
@@ -83,14 +91,28 @@ class _UserProjectCardState extends State<UserProjectCard> {
                     Visibility(
                       visible: !widget.project.isPublished,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          publishProject(request, widget.project.id);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => ProjectsPage())),
+                          );
+                        },
                         child: Text('Publish'),
                       ),
                     ),
                     Visibility(
                       visible: !widget.project.isPublished,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          deleteProject(request, widget.project.id);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => ProjectsPage())),
+                          );
+                        },
                         child: Text('Delete'),
                       ),
                     ),
@@ -98,7 +120,14 @@ class _UserProjectCardState extends State<UserProjectCard> {
                       visible:
                           widget.project.isPublished && !widget.project.isDone,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          doneProject(request, widget.project.id);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => ProjectsPage())),
+                          );
+                        },
                         child: Text('Done'),
                       ),
                     ),
