@@ -10,9 +10,9 @@ Future<bool> login(
     'username': username,
     'password': password,
   });
-
   if (request.loggedIn) {
     print('Login Success');
+    request.jsonData['username'] = username;
     return true;
   } else {
     print('Login Failed');
