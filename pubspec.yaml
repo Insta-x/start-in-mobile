@@ -57,10 +57,10 @@ dev_dependencies:
 
 flutter_application_id:
   android: 
-    id: "com.example.myAndroidApp"
+    id: "com.example.start_in_mobile_android"
     name: "StartIn - Android"
   ios:
-    id: "com.example.myIosApp"
+    id: "com.example.start_in_mobile_ios"
     name: "StartIn - iOS"
 flutter_icons:
 
