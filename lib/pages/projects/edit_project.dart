@@ -55,6 +55,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
                       TextFormField(
                         initialValue: snapshot.data!.title,
                         decoration: InputDecoration(
+                          icon: Icon(Icons.title),
                           labelText: 'Title',
                           hintText: "Title",
                           // Menambahkan circular border agar lebih rapi
@@ -86,6 +87,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
                         keyboardType: TextInputType.multiline,
                         maxLines: null,
                         decoration: InputDecoration(
+                          icon: Icon(Icons.description),
                           labelText: 'Description',
                           hintText: "Description",
                           // Menambahkan circular border agar lebih rapi
@@ -115,6 +117,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
                       TextFormField(
                         initialValue: snapshot.data!.donationTarget.toString(),
                         decoration: InputDecoration(
+                          icon: Icon(Icons.monetization_on),
                           labelText: 'Donation Target',
                           hintText: "Nominal",
 
@@ -151,21 +154,23 @@ class _EditProjectPageState extends State<EditProjectPage> {
                           return null;
                         },
                       ),
-                      TextButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.blue),
-                        ),
-                        onPressed: () async {
-                          if (_editProjectFormKey.currentState!.validate()) {
-                            await editProject(request, widget.projectId, title,
-                                    description, donationTarget)
-                                .then((value) => Navigator.pop(context));
-                          }
-                        },
-                        child: const Text(
-                          "Edit",
-                          style: TextStyle(color: Colors.white),
+                      Center(
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.blue),
+                          ),
+                          onPressed: () async {
+                            if (_editProjectFormKey.currentState!.validate()) {
+                              await editProject(request, widget.projectId,
+                                      title, description, donationTarget)
+                                  .then((value) => Navigator.pop(context));
+                            }
+                          },
+                          child: const Text(
+                            "Edit",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ],
