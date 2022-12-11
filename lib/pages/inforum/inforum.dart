@@ -21,7 +21,7 @@ class _InForumState extends State<InForum> {
     'technology' : Colors.blue,
     'business' : Colors.amber,
     'startup' : Colors.lightGreen,
-    'miscelleaneous' : Colors.grey,
+    'misc' : Colors.grey,
   } ;
 
   @override
@@ -33,10 +33,8 @@ class _InForumState extends State<InForum> {
         appBar: AppBar(
           title: const Text(
             "inforum",
-            style: TextStyle(color: Color.fromARGB(255, 0, 32, 92)),
+            style: TextStyle(color: Colors.white),
           ),
-          
-          backgroundColor: Color.fromARGB(255, 146, 232, 176),
         ),
         drawer: const AppDrawer(),
         floatingActionButton:  FloatingActionButton(

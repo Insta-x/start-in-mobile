@@ -19,8 +19,8 @@ class _ForumFormState extends State<ForumForm> {
   
   String title = "";
   String content = "";
-  String defaulCategory = "miscellaneous";
-  List<String> categories = ["miscellaneous", "technology", "startup", "business"];
+  String defaulCategory = "misc";
+  List<String> categories = ["misc", "technology", "startup", "business"];
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +154,7 @@ class _ForumFormState extends State<ForumForm> {
                   }
                 },
                 child: const Text(
-                  "Login",
+                  "create",
                   style: TextStyle(color: Colors.white),
                 ),
               ),
