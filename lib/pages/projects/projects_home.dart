@@ -169,20 +169,45 @@ class _ProjectsPageState extends State<ProjectsPage>
               List<Widget> children;
               if (!request.loggedIn) {
                 return Center(
-                  child: Text.rich(
-                    TextSpan(
-                      text: 'Login to check your projects',
-                      style: TextStyle(
-                        fontSize: 26.0,
-                        color: Colors.blue,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => LoginPage())));
-                        },
+                  child: Container(
+                    margin: EdgeInsets.all(14),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Create New Project',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          'Propose an innovative project that will increase the life quality of everyone.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(height: 16),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(10),
+                            backgroundColor: Colors.amber,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => LoginPage())));
+                          },
+                          child: Text(
+                            'Login to create project',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -232,24 +257,32 @@ class _ProjectsPageState extends State<ProjectsPage>
                   child: Column(
                     children: [
                       Center(
-                        child: Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            CreateProjectPage())));
-                              },
-                              child: Text(
-                                'Create New Project',
-                                style: TextStyle(
-                                  fontSize: 30.0,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Column(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.all(10),
+                                  backgroundColor: Colors.blue,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              CreateProjectPage())));
+                                },
+                                child: Text(
+                                  'Create New Project',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Column(
