@@ -1,86 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:start_in_mobile/pages/shop/shop.dart';
+import 'package:start_in_mobile/util/constants.dart';
+import 'package:start_in_mobile/widgets/category_card.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+void main() => runApp(MyApp());
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Meditation App',
+      theme: ThemeData(
+        fontFamily: "Cairo",
+        scaffoldBackgroundColor: kBackgroundColor,
+        textTheme: Theme.of(context).textTheme.apply(displayColor: kTextColor),
+      ),
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context)
+        .size; //this gonna give us total height and with of our device
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('Home'),
+        title: Text("Home"),
       ),
       drawer: const AppDrawer(),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      // bottomNavigationBar: BottomNavBar(),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            // Here the height of the container is 45% of our total height
+            height: size.height * .45,
+            decoration: BoxDecoration(
+              color: Color(0xFFF5CEB8),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 52,
+                      width: 52,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF2BEA1),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.asset("assets/images/startin-logo.png"),
+                    ),
+                  ),
+                  Text(
+                    "StartIn",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4
+                        ?.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    "Innovate your better future \n",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    "The StartIn Foundation aims to advance technological innovation in Indonesia. StartIn provides a means for everyone who has a technological innovation idea to get donations  to fund their projects. StartIn also provides a means for everyone to learn everything about technology and how to start their own business, even startup, by attending workshops, talk shows, courses and participating on myriads of forum threads available on StartIn. StartIn also displays the latest news about tech startups and the latest technology with the most potential, to keep everybody update with current technology issues.\n\n\n",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.normal),
+                  ),
+                  // SearchBar(),
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: .85,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      children: <Widget>[
+                        CategoryCard(
+                          title: "Projects",
+                          svgSrc: "assets/images/project.svg",
+                          press: () {},
+                        ),
+                        CategoryCard(
+                          title: "Forum",
+                          svgSrc: "assets/images/forum.svg",
+                          press: () {},
+                        ),
+                        CategoryCard(
+                          title: "Shop",
+                          svgSrc: "assets/images/shop-svgrepo-com.svg",
+                          press: () {},
+                        ),
+                        CategoryCard(
+                          title: "Events",
+                          svgSrc: "gaada fotonya di assets",
+                          press: () {},
+                        ),
+                        CategoryCard(
+                          title: "News",
+                          svgSrc: "assets/images/news.svg",
+                          press: () {},
+                        ),
+                        CategoryCard(
+                          title: "Courses",
+                          svgSrc: "assets/images/courses.svg",
+                          press: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
