@@ -34,7 +34,9 @@ class _ForumPageState extends State<ForumPage> {
             title: const Text(
           "inforum",
           style: TextStyle(color: Colors.white),
-        )),
+          ),
+          backgroundColor: Color.fromARGB(255, 42, 170, 26),
+        ),
         drawer: const AppDrawer(),
         body: Container(
           color: Colors.white,

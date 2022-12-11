@@ -28,7 +28,7 @@ class _AppDrawerState extends State<AppDrawer> {
           // Menambahkan clickable menu
           ListTile(
             title: Row(
-              children: const [Text('inforum')],
+              children: const [Text('Inforum')],
             ),
             onTap: () {
               // Route menu ke halaman utama
@@ -39,7 +39,7 @@ class _AppDrawerState extends State<AppDrawer> {
             },
           ),
           ListTile(
-            title: const Text('StartIn'),
+            title: const Text('Projects'),
             onTap: () {
               // Route menu ke halaman utama
               Navigator.pushReplacement(
