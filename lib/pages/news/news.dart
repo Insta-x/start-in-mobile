@@ -24,8 +24,8 @@ class _NewsState extends State<News> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("News")
-        ,
+        title: const Text("News"),
+        backgroundColor: Color.fromARGB(255, 44, 83, 95),
       ),
       drawer: const AppDrawer(),
        body: FutureBuilder(

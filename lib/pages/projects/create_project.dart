@@ -25,6 +25,7 @@ class _CreateProjectPageState extends State<CreateProjectPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Create'),
+        backgroundColor: Color.fromARGB(255, 10, 13, 170),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

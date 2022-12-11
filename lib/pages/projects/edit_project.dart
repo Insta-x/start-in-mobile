@@ -29,6 +29,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit'),
+        backgroundColor: Color.fromARGB(255, 10, 13, 170),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

@@ -35,6 +35,7 @@ class _InForumState extends State<InForum> {
             "inforum",
             style: TextStyle(color: Colors.white),
           ),
+          backgroundColor: Color.fromARGB(255, 42, 170, 26),
         ),
         drawer: const AppDrawer(),
         floatingActionButton:  FloatingActionButton(
