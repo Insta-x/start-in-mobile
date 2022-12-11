@@ -39,6 +39,7 @@ class _ProjectsPageState extends State<ProjectsPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
+        backgroundColor: Color.fromARGB(255, 10, 13, 170),
         bottom: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
