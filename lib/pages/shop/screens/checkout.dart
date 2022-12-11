@@ -63,7 +63,7 @@ class _CheckoutState extends State<Checkout> {
               Navigator.pop(context);
             },
             child: Text("Back"),
-          )
+          ),
         ],
       ),
     );
