@@ -40,130 +40,136 @@ class _EditProjectPageState extends State<EditProjectPage> {
         future: fetchProject(request, widget.projectId),
         builder: (BuildContext context, AsyncSnapshot<Project> snapshot) {
           if (snapshot.hasData) {
+            title = snapshot.data!.title;
+            description = snapshot.data!.description;
+            donationTarget = snapshot.data!.donationTarget;
+
             return Form(
               key: _editProjectFormKey,
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TextFormField(
-                      initialValue: snapshot.data!.title,
-                      decoration: InputDecoration(
-                        hintText: "Title",
-                        // Menambahkan circular border agar lebih rapi
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
+                child: Container(
+                  margin: EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        initialValue: snapshot.data!.title,
+                        decoration: InputDecoration(
+                          labelText: 'Title',
+                          hintText: "Title",
+                          // Menambahkan circular border agar lebih rapi
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
                         ),
-                      ),
-                      // Menambahkan behavior saat nama diketik
-                      onChanged: (String? value) {
-                        setState(() {
+                        // Menambahkan behavior saat nama diketik
+                        onChanged: (String? value) {
                           title = value!;
-                        });
-                      },
-                      // Menambahkan behavior saat data disimpan
-                      onSaved: (String? value) {
-                        setState(() {
+                        },
+                        // Menambahkan behavior saat data disimpan
+                        onSaved: (String? value) {
                           title = value!;
-                        });
-                      },
-                      // Validator sebagai validasi form
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Judul tidak boleh kosong!';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      initialValue: snapshot.data!.description,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        hintText: "Description",
-                        // Menambahkan circular border agar lebih rapi
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                        },
+                        // Validator sebagai validasi form
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Judul tidak boleh kosong!';
+                          }
+                          return null;
+                        },
                       ),
-                      // Menambahkan behavior saat nama diketik
-                      onChanged: (String? value) {
-                        setState(() {
-                          description = value!;
-                        });
-                      },
-                      // Menambahkan behavior saat data disimpan
-                      onSaved: (String? value) {
-                        setState(() {
-                          description = value!;
-                        });
-                      },
-                      // Validator sebagai validasi form
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Description tidak boleh kosong!';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextFormField(
-                      initialValue: snapshot.data!.donationTarget.toString(),
-                      decoration: InputDecoration(
-                        hintText: "Nominal",
-                        // Menambahkan circular border agar lebih rapi
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                      SizedBox(
+                        height: 14,
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      // Menambahkan behavior saat nama diketik
-                      onChanged: (String? value) {
-                        setState(() {
+                      TextFormField(
+                        initialValue: snapshot.data!.description,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          hintText: "Description",
+                          // Menambahkan circular border agar lebih rapi
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                        // Menambahkan behavior saat nama diketik
+                        onChanged: (String? value) {
+                          description = value!;
+                        },
+                        // Menambahkan behavior saat data disimpan
+                        onSaved: (String? value) {
+                          description = value!;
+                        },
+                        // Validator sebagai validasi form
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Description tidak boleh kosong!';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 14,
+                      ),
+                      TextFormField(
+                        initialValue: snapshot.data!.donationTarget.toString(),
+                        decoration: InputDecoration(
+                          labelText: 'Donation Target',
+                          hintText: "Nominal",
+
+                          // Menambahkan circular border agar lebih rapi
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
+                        // Menambahkan behavior saat nama diketik
+                        onChanged: (String? value) {
                           if (int.tryParse(value!) != null) {
                             donationTarget = int.parse(value);
                           }
-                        });
-                      },
-                      // Menambahkan behavior saat data disimpan
-                      onSaved: (String? value) {
-                        setState(() {
+                        },
+                        // Menambahkan behavior saat data disimpan
+                        onSaved: (String? value) {
                           if (int.tryParse(value!) != null) {
                             donationTarget = int.parse(value);
                           }
-                        });
-                      },
-                      // Validator sebagai validasi form
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Nominal tidak boleh kosong!';
-                        } else if (int.tryParse(value) == null) {
-                          return 'Nominal harus berupa angka!';
-                        } else if (int.tryParse(value)! < 1) {
-                          return 'Nominal harus positif!';
-                        }
-                        return null;
-                      },
-                    ),
-                    TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        },
+                        // Validator sebagai validasi form
+                        validator: (String? value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Nominal tidak boleh kosong!';
+                          } else if (int.tryParse(value) == null) {
+                            return 'Nominal harus berupa angka!';
+                          } else if (int.tryParse(value)! < 1) {
+                            return 'Nominal harus positif!';
+                          }
+                          return null;
+                        },
                       ),
-                      onPressed: () async {
-                        if (_editProjectFormKey.currentState!.validate()) {
-                          await editProject(request, widget.projectId, title,
-                                  description, donationTarget)
-                              .then((value) => Navigator.pop(context));
-                        }
-                      },
-                      child: const Text(
-                        "Edit",
-                        style: TextStyle(color: Colors.white),
+                      TextButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                        ),
+                        onPressed: () async {
+                          if (_editProjectFormKey.currentState!.validate()) {
+                            await editProject(request, widget.projectId, title,
+                                    description, donationTarget)
+                                .then((value) => Navigator.pop(context));
+                          }
+                        },
+                        child: const Text(
+                          "Edit",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

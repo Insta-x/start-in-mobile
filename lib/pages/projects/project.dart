@@ -105,7 +105,12 @@ class _ProjectPageState extends State<ProjectPage> {
                             ),
                             Visibility(
                               visible: !snapshot.data!.isDone,
-                              child: TextButton(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: request.loggedIn
+                                      ? Colors.blue
+                                      : Colors.amber,
+                                ),
                                 onPressed: () {
                                   Navigator.push(
                                     context,

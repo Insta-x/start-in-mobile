@@ -5,8 +5,6 @@ Future<Project> fetchProject(CookieRequest request, int projectId) async {
   final responseData = await request
       .get('https://start-in.up.railway.app/projects/api/project/$projectId');
 
-  print(responseData);
-
   return Project.fromJson(responseData);
 }
 

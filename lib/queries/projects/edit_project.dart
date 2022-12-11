@@ -11,5 +11,7 @@ Future<bool> editProject(CookieRequest request, int projectId, String title,
     'donation_target': donationTarget.toString(),
   });
 
+  print(responseData);
+
   return responseData['status'] == 'Success';
 }
