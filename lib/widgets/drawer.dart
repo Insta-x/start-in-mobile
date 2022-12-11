@@ -44,7 +44,7 @@ class _AppDrawerState extends State<AppDrawer> {
               // Route menu ke halaman utama
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const ProjectsPage()),
+                MaterialPageRoute(builder: (context) => ProjectsPage()),
               );
             },
           ),

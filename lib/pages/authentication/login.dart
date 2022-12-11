@@ -50,7 +50,6 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w500,
                               fontSize: 30),
                         )),
-                    
                     Container(
                       padding: const EdgeInsets.all(10),
                       child: TextFormField(
@@ -86,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
                       child: TextFormField(
                         decoration: InputDecoration(
-                          hintText: "Judul",
+                          hintText: "Password",
                           // Menambahkan circular border agar lebih rapi
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0),
@@ -107,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         // Validator sebagai validasi form
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
-                            return 'password tidak boleh kosong!';
+                            return 'Password tidak boleh kosong!';
                           }
                           return null;
                         },
@@ -144,18 +143,20 @@ class _LoginPageState extends State<LoginPage> {
                         const Text('Does not have account?'),
                         TextButton(
                           child: const Text(
-                            'Sign in',
+                            'Register',
                             style: TextStyle(fontSize: 20),
                           ),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const RegisterPage()));
                           },
                         )
                       ],
                     ),
                   ],
-                )))
-
-        );
+                ))));
   }
 }

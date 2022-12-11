@@ -25,8 +25,16 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // if you need this
+        side: BorderSide(
+          color: widget.project.isDone ? Colors.green : Colors.grey,
+          width: 1,
+        ),
+      ),
+      color: widget.project.isDone ? Colors.lightGreen[50] : Colors.white,
       child: Container(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
         child: Column(
           children: [
             Row(
@@ -37,7 +45,8 @@ class _ProjectCardState extends State<ProjectCard> {
                   children: [
                     Text(
                       widget.project.title,
-                      style: const TextStyle(fontSize: 24),
+                      style: const TextStyle(
+                          fontSize: 24, fontWeight: FontWeight.w500),
                     ),
                     Text(
                       widget.project.username,
@@ -55,17 +64,17 @@ class _ProjectCardState extends State<ProjectCard> {
                     const SizedBox(height: 10.0),
                     Text.rich(
                       TextSpan(
-                        text: '${widget.project.currentDonation}',
+                        text: 'Rp${widget.project.currentDonation}',
                         style: const TextStyle(
                           fontSize: 16.0,
                           color: Colors.black,
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: ' / ${widget.project.donationTarget}',
+                            text: ' / Rp${widget.project.donationTarget}',
                             style: TextStyle(
                               fontSize: 16.0,
-                              color: Colors.grey[400],
+                              color: Colors.grey[700],
                             ),
                           ),
                         ],
