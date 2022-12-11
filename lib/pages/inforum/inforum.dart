@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/inforum/forum.dart';
+import 'package:start_in_mobile/pages/inforum/widgets/forumForm.dart';
 import 'package:start_in_mobile/pages/inforum/widgets/forumModal.dart';
 import 'package:start_in_mobile/queries/get_all_forum.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
@@ -28,9 +29,6 @@ class _InForumState extends State<InForum> {
 
     var request = context.watch<CookieRequest>();
     
-    void _toggleModal(){
-      showBottomModal(context, ForumModal());
-    }
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -43,7 +41,11 @@ class _InForumState extends State<InForum> {
         drawer: const AppDrawer(),
         floatingActionButton:  FloatingActionButton(
 
-          onPressed: request.loggedIn ? _toggleModal: null,
+          onPressed: request.loggedIn ? (){
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ForumForm())
+            );
+          }: null,
           backgroundColor: request.loggedIn ?  const Color.fromARGB(255, 44, 145, 195) : Color.fromARGB(255, 189, 188, 188),
           child: Icon(
               Icons.add_comment,
