@@ -12,70 +12,124 @@ class EventsDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Events Detail'),
+        backgroundColor: Color.fromARGB(255, 69, 39, 77),
       ),
       drawer: AppDrawer(),
-      // body: Container(
-      //   margin: new EdgeInsets.symmetric(vertical: 20.0),
-      //   child: Column(
-      //     children: [
-      //       Center(
-      //         child: Text(data.event_title,
-      //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32)
-      //         ),
-      //       ),
-      //       Row(
-      //         children: [
-      //           Text("Release Date : ",
-      //             style:
-      //               TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
-      //           ),
-      //           Text(data.release_date,
-      //             style:
-      //               TextStyle(fontWeight: FontWeight.normal, fontSize: 16)
-      //           ),
-      //         ],
-      //       ),
-      //       Row(
-      //         children: [
-      //           Text("Rating : ",
-      //             style:
-      //               TextStyle(fontWeight: FontWeight.bold, fontSize: 16)
-      //           ),
-      //           Text(data.film_rating.toString(),
-      //               style:
-      //                   TextStyle(fontWeight: FontWeight.normal, fontSize: 16)
-      //           ),
-      //         ],
-      //       ),
-      //       Row(
-      //         children: [
-      //           Text(
-      //             "Review : ",
-      //             style: TextStyle(
-      //               fontWeight: FontWeight.bold,
-      //               color: Colors.black,
-      //               fontSize: 16
-      //             ),
-      //           )
-      //         ],
-      //       ),
-      //       Row(
-      //         children: [
-      //           Text(
-      //             data.description,
-      //             style: const TextStyle(
-      //               color: Colors.black,
-      //             ),
-      //           ),
-      //         ],
-      //       )
-      //     ],
-      //   ),
-      // ),
+      body: Container(
+        margin: new EdgeInsets.symmetric(vertical: 20.0),
+        child: Column(
+          children: [
+            // JUDUL
+            Center(
+              child: Text(data.fields.event_title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+            ),
+            Row(
+              children: [
+                Text(
+                  "",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 20),
+                )
+              ],
+            ),
+            // DESCRIPTION
+            Row(
+              children: [
+                Text(
+                  "Description : ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  data.fields.description,
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16),
+                )
+              ],
+            ),
+            // Schedule
+            Row(
+              children: [
+                Text(
+                  "Schedule : ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  data.fields.schedule,
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16),
+                )
+              ],
+            ),
+            // Location
+            Row(
+              children: [
+                Text(
+                  "Location : ",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      fontSize: 16),
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  data.fields.location,
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       persistentFooterButtons: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: Color.fromARGB(255, 69, 39, 77),
             minimumSize: const Size.fromHeight(40),
           ),
           onPressed: () {

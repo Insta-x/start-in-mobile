@@ -95,6 +95,23 @@ class _EventsState extends State<Events> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 69, 39, 77),
+                        minimumSize: const Size.fromHeight(40),
+                        ),
+                        onPressed: () {
+                        Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EventsDetail(data: snapshot.data![index]))
+                          );
+                        },
+                        child: const Text(
+                          'Read more',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
                     ],
                   ),
                 )
