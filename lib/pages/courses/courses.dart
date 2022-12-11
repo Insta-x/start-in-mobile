@@ -18,25 +18,25 @@ class _CoursesState extends State<Courses> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<AddedCourse>>(
-        future: CoursesApi.getCourse(),
-        builder: (context, snapshot) {
-          final courses = snapshot.data;
+        body: FutureBuilder<List<AddedCourse>>(
+            future: CoursesApi.getCourse(),
+            builder: (context, snapshot) {
+              final courses = snapshot.data;
 
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-            default:
-              if (snapshot.hasError) {
-                return Center(child: Text('Error Occurred!'));
-              } else {
-                return Container();
-                //itemBuilder: (context, index) => GestureDetector()
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Center(child: CircularProgressIndicator());
+                default:
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error Occurred!'));
+                  } else {
+                    return Container();
+                    //itemBuilder: (context, index) => GestureDetector()
+                  }
               }
-          }
-        }
-      )
-    );
+            }));
+  }
+}
 
     //             return .builder(
     //               physics: BouncingScrollPhysics(),

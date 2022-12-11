@@ -9,7 +9,6 @@ import 'package:start_in_mobile/pages/events/events.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/auth_logout.dart';
 
-
 import '../pages/courses/courses.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -25,60 +24,38 @@ class _AppDrawerState extends State<AppDrawer> {
     final request = context.watch<CookieRequest>();
 
     return Drawer(
-      child: Column(children: [
-        // Menambahkan clickable menu
-        ListTile(
-          title: Row(
-            children: const [Text('inforum')],
+      child: Column(
+        children: [
+          // Menambahkan clickable menu
+          ListTile(
+            title: Row(
+              children: const [Text('inforum')],
+            ),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const InForum()),
+              );
+            },
           ),
-<<<<<<< HEAD
-          onTap: () {
-            // Route menu ke halaman utama
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const InForum()),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text('StartIn'),
-          onTap: () {
-            // Route menu ke halaman utama
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const ProjectsPage()),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text('Courses'),
-          onTap: () {
-            // Route menu ke halaman utama
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const Courses()),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text('StartIn Store'),
-          onTap: () {
-            // Route menu ke halaman Shop
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => ShopPage()),
-            );
-          },
-        ),
-      ]),
-=======
           ListTile(
             title: const Text('StartIn'),
             onTap: () {
               // Route menu ke halaman utama
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => ProjectsPage()),
+                MaterialPageRoute(builder: (context) => const ProjectsPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Courses'),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const Courses()),
               );
             },
           ),
@@ -89,6 +66,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ShopPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('StartIn'),
+            onTap: () {
+              // Route menu ke halaman utama
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => ProjectsPage()),
               );
             },
           ),
@@ -132,7 +119,6 @@ class _AppDrawerState extends State<AppDrawer> {
           ),
         ],
       ),
->>>>>>> 096837f9921bb282359787f6fe853d33abd2f2be
     );
   }
 }
