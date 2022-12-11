@@ -4,7 +4,7 @@ Future<void> logout(CookieRequest request) async {
   print(request.headers);
 
   final response =
-      await request.get('https://start-in.up.railway.app/auth/api/logout/');
+      await request.logout('https://start-in.up.railway.app/auth/api/logout/');
 
   print(response);
 
