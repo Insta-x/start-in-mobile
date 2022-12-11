@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/inforum/forum.dart';
+import 'package:start_in_mobile/pages/inforum/widgets/forumForm.dart';
+import 'package:start_in_mobile/pages/inforum/widgets/forumModal.dart';
 import 'package:start_in_mobile/queries/get_all_forum.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:start_in_mobile/widgets/bottomModal.dart';
 
 class InForum extends StatefulWidget {
   const InForum({super.key});
@@ -16,19 +21,36 @@ class _InForumState extends State<InForum> {
     'technology' : Colors.blue,
     'business' : Colors.amber,
     'startup' : Colors.lightGreen,
-    'miscelleaneous' : Colors.grey,
+    'misc' : Colors.grey,
   } ;
 
+  @override
   Widget build(BuildContext context) {
+
+    var request = context.watch<CookieRequest>();
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text(
             "inforum",
-            style: TextStyle(color: Color.fromARGB(255, 0, 32, 92)),
+            style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 146, 232, 176),
         ),
         drawer: const AppDrawer(),
+        floatingActionButton:  FloatingActionButton(
+
+          onPressed: request.loggedIn ? (){
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ForumForm())
+            );
+          }: null,
+          backgroundColor: request.loggedIn ?  const Color.fromARGB(255, 44, 145, 195) : Color.fromARGB(255, 189, 188, 188),
+          child: Icon(
+              Icons.add_comment,
+              color : request.loggedIn  ? Colors.white : Color.fromARGB(255, 88, 88, 88),
+              size :27.0
+              ),
+        ),
         body: FutureBuilder(
                     future: get_all_forum(),
                     builder: (context, AsyncSnapshot snapshot) {
