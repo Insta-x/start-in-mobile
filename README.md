@@ -1,4 +1,5 @@
-[Link Aplikasi Heroku](https://start-in.herokuapp.com/)
+[![Build status](https://build.appcenter.ms/v0.1/apps/479a053c-1ee0-4a63-a23d-50d97b31308d/branches/main/badge)](https://appcenter.ms)
+[Link Aplikasi Heroku](https://start-in.herokuapp.com/) 
 
 ## Anggota Kelompok
 1. Uttsada Jason
