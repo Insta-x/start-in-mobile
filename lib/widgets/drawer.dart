@@ -4,9 +4,11 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/pages/projects/projects_home.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
+import 'package:start_in_mobile/pages/news/news.dart';
 import 'package:start_in_mobile/pages/events/events.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/auth_logout.dart';
+
 
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
@@ -53,6 +55,16 @@ class _AppDrawerState extends State<AppDrawer> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => ShopPage()),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('News'),
+            onTap: () {
+              // Route menu ke halaman News
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => News()),
               );
             },
           ),

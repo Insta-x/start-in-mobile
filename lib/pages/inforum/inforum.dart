@@ -35,6 +35,7 @@ class _InForumState extends State<InForum> {
             "inforum",
             style: TextStyle(color: Color.fromARGB(255, 0, 32, 92)),
           ),
+          
           backgroundColor: Color.fromARGB(255, 146, 232, 176),
         ),
         drawer: const AppDrawer(),
