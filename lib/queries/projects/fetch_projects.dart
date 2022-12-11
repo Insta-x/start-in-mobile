@@ -10,7 +10,6 @@ Future<Project> fetchProject(CookieRequest request, int projectId) async {
 
 Future<List<Project>> fetchProjects(
     CookieRequest request, String searchQuery) async {
-  print(searchQuery);
   final responseData = await request.get(
       'https://start-in.up.railway.app/projects/get-projects/?search=$searchQuery');
 
@@ -21,8 +20,6 @@ Future<List<Project>> fetchProjects(
       projectList.add(Project.fromJson(project));
     }
   }
-
-  print(projectList);
 
   return projectList;
 }

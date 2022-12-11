@@ -3,7 +3,6 @@ import 'package:start_in_mobile/models/project.dart';
 
 Future<bool> createProject(CookieRequest request, String title,
     String description, int donationTarget) async {
-  print(request.headers);
   final responseData = await request
       .post('https://start-in.up.railway.app/projects/api/create-project/', {
     'title': title,
