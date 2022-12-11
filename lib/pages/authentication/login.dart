@@ -4,7 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/pages/authentication/register.dart';
 import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
-import 'package:start_in_mobile/queries/auth_login.dart';
+import 'package:start_in_mobile/queries/authentication/auth_login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

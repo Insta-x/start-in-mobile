@@ -4,8 +4,8 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
-import 'package:start_in_mobile/queries/auth_login.dart';
-import 'package:start_in_mobile/queries/post_forum.dart';
+import 'package:start_in_mobile/queries/authentication/auth_login.dart';
+import 'package:start_in_mobile/queries/inforum/post_forum.dart';
 
 class ForumForm extends StatefulWidget {
   const ForumForm({super.key});

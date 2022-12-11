@@ -7,7 +7,7 @@ import 'package:start_in_mobile/pages/shop/shop.dart';
 import 'package:start_in_mobile/pages/news/news.dart';
 import 'package:start_in_mobile/pages/events/events.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
-import 'package:start_in_mobile/queries/auth_logout.dart';
+import 'package:start_in_mobile/queries/authentication/auth_logout.dart';
 
 
 class AppDrawer extends StatefulWidget {
