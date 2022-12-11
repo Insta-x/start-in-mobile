@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/models/project.dart';
+import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/pages/projects/create_project.dart';
 import 'package:start_in_mobile/pages/projects/widgets/user_project_card.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
@@ -17,6 +19,11 @@ class ProjectsPage extends StatefulWidget {
 
 class _ProjectsPageState extends State<ProjectsPage>
     with TickerProviderStateMixin {
+  final _searchFormKey = GlobalKey<FormState>();
+  String searchQuery = '';
+
+  Future<List<Project>>? _projects;
+
   late TabController _tabController;
 
   @override
@@ -32,12 +39,6 @@ class _ProjectsPageState extends State<ProjectsPage>
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {},
-          )
-        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
@@ -55,7 +56,8 @@ class _ProjectsPageState extends State<ProjectsPage>
         controller: _tabController,
         children: [
           FutureBuilder<List<Project>>(
-            future: fetchProjects(request, ''),
+            initialData: [],
+            future: _projects ?? fetchProjects(request, ''),
             builder:
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;
@@ -102,20 +104,112 @@ class _ProjectsPageState extends State<ProjectsPage>
                   margin: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10.0),
                   child: Column(
-                    children: children,
+                    children: [
+                      Form(
+                        key: _searchFormKey,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  hintText: "Search",
+                                  // Menambahkan circular border agar lebih rapi
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                ),
+                                onChanged: (String? value) {
+                                  searchQuery = value ?? '';
+                                },
+                                onSaved: (String? value) {
+                                  searchQuery = value ?? '';
+                                },
+                                validator: (String? value) {
+                                  return null;
+                                },
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.blue),
+                                ),
+                                onPressed: () async {
+                                  if (_searchFormKey.currentState!.validate()) {
+                                    setState(() {
+                                      _projects =
+                                          fetchProjects(request, searchQuery);
+                                    });
+                                  }
+                                },
+                                child: const Text(
+                                  "Search",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: children,
+                      ),
+                    ],
                   ),
                 ),
               );
             },
           ),
           FutureBuilder<List<Project>>(
-            future: fetchUserProjects(request),
+            future: request.loggedIn ? fetchUserProjects(request) : null,
             builder:
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;
               if (!request.loggedIn) {
-                return const Center(
-                  child: Text('Login to check your projects'),
+                return Center(
+                  child: Container(
+                    margin: EdgeInsets.all(14),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Create New Project',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          'Propose an innovative project that will increase the life quality of everyone.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w400),
+                        ),
+                        SizedBox(height: 16),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(10),
+                            backgroundColor: Colors.amber,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => LoginPage())));
+                          },
+                          child: Text(
+                            'Login to create project',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30.0,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               }
               if (snapshot.hasData) {
@@ -163,24 +257,32 @@ class _ProjectsPageState extends State<ProjectsPage>
                   child: Column(
                     children: [
                       Center(
-                        child: Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: ((context) =>
-                                            CreateProjectPage())));
-                              },
-                              child: Text(
-                                'Create New Project',
-                                style: TextStyle(
-                                  fontSize: 30.0,
+                        child: Container(
+                          margin: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Column(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  padding: EdgeInsets.all(10),
+                                  backgroundColor: Colors.blue,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              CreateProjectPage())));
+                                },
+                                child: Text(
+                                  'Create New Project',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30.0,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Column(

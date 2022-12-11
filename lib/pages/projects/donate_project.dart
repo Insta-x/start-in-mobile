@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/queries/projects/donate_project.dart';
 
 class DonateProjectPage extends StatefulWidget {
@@ -35,65 +34,72 @@ class _DonateProjectPageState extends State<DonateProjectPage> {
       body: Form(
         key: _donateProjectFormKey,
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Nominal",
-                  // Menambahkan circular border agar lebih rapi
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+          child: Container(
+            margin: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.monetization_on),
+                    labelText: 'Donation Amount',
+                    hintText: "Nominal",
+                    // Menambahkan circular border agar lebih rapi
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
+                  // Menambahkan behavior saat nama diketik
+                  onChanged: (String? value) {
+                    setState(() {
+                      if (int.tryParse(value!) != null) {
+                        nominal = int.parse(value);
+                      }
+                    });
+                  },
+                  // Menambahkan behavior saat data disimpan
+                  onSaved: (String? value) {
+                    setState(() {
+                      if (int.tryParse(value!) != null) {
+                        nominal = int.parse(value);
+                      }
+                    });
+                  },
+                  // Validator sebagai validasi form
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Nominal tidak boleh kosong!';
+                    } else if (int.tryParse(value) == null) {
+                      return 'Nominal harus berupa angka!';
+                    } else if (int.tryParse(value)! < 1) {
+                      return 'Nominal harus positif!';
+                    }
+                    return null;
+                  },
+                ),
+                Center(
+                  child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    ),
+                    onPressed: () async {
+                      if (_donateProjectFormKey.currentState!.validate()) {
+                        await donateProject(request, widget.projectId, nominal)
+                            .then((value) => Navigator.pop(context));
+                      }
+                    },
+                    child: const Text(
+                      "Donate",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ),
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                // Menambahkan behavior saat nama diketik
-                onChanged: (String? value) {
-                  setState(() {
-                    if (int.tryParse(value!) != null) {
-                      nominal = int.parse(value);
-                    }
-                  });
-                },
-                // Menambahkan behavior saat data disimpan
-                onSaved: (String? value) {
-                  setState(() {
-                    if (int.tryParse(value!) != null) {
-                      nominal = int.parse(value);
-                    }
-                  });
-                },
-                // Validator sebagai validasi form
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Nominal tidak boleh kosong!';
-                  } else if (int.tryParse(value) == null) {
-                    return 'Nominal harus berupa angka!';
-                  } else if (int.tryParse(value)! < 1) {
-                    return 'Nominal harus positif!';
-                  }
-                  return null;
-                },
-              ),
-              TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
-                ),
-                onPressed: () async {
-                  if (_donateProjectFormKey.currentState!.validate()) {
-                    await donateProject(request, widget.projectId, nominal)
-                        .then((value) => Navigator.pop(context));
-                  }
-                },
-                child: const Text(
-                  "Donate",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

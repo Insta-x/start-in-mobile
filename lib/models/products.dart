@@ -7,34 +7,25 @@ String todoToJson(List<Product> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class Product {
-
   late String name;
   late double price;
   late String image;
   late String category;
+  late String description;
 
-      Product(
+  Product(
       {required this.name,
       required this.price,
       required this.image,
-      required this.category});
-  
-  
-  // factory Product.fromJson(Map<String, dynamic> json) {
-  //   return Product(
-  //     name: json['name'],
-  //     price: json['price'],
-  //     // image: Image.asset(json['image']),
-  //     image: json['image'],
-  //     category: json['category'],
-  //   );
-  // }
+      required this.category,
+      required this.description});
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         name: json["name"],
         price: json["price"],
         image: json["image"],
         category: json["category"],
+        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -42,5 +33,6 @@ class Product {
         "price": price,
         "image": image,
         "category": category,
+        "description": description,
       };
 }

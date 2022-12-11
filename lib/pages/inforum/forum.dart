@@ -25,7 +25,7 @@ class _ForumPageState extends State<ForumPage> {
         appBar: AppBar(
             title: const Text(
           "inforum",
-          style: TextStyle(color: Color.fromARGB(255, 0, 32, 92)),
+          style: TextStyle(color: Colors.white),
         )),
         drawer: const AppDrawer(),
         body: Container(
