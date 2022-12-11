@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -6,7 +7,6 @@ import 'package:start_in_mobile/models/project.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/projects/fetch_projects.dart';
 import 'package:start_in_mobile/pages/projects/donate_project.dart';
-import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:start_in_mobile/pages/projects/widgets/project_like_button.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -18,6 +18,8 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
+  Future<Project>? _project;
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -34,7 +36,7 @@ class _ProjectPageState extends State<ProjectPage> {
         actions: [
           IconButton(
             onPressed: () {
-              // TODO : reload button for project page
+              setState(() {});
             },
             icon: const Icon(Icons.replay_outlined),
           ),

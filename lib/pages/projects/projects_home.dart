@@ -129,22 +129,25 @@ class _ProjectsPageState extends State<ProjectsPage>
                                 },
                               ),
                             ),
-                            TextButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(Colors.blue),
-                              ),
-                              onPressed: () async {
-                                if (_searchFormKey.currentState!.validate()) {
-                                  setState(() {
-                                    _projects =
-                                        fetchProjects(request, searchQuery);
-                                  });
-                                }
-                              },
-                              child: const Text(
-                                "Search",
-                                style: TextStyle(color: Colors.white),
+                            Container(
+                              margin: EdgeInsets.only(left: 5),
+                              child: TextButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.blue),
+                                ),
+                                onPressed: () async {
+                                  if (_searchFormKey.currentState!.validate()) {
+                                    setState(() {
+                                      _projects =
+                                          fetchProjects(request, searchQuery);
+                                    });
+                                  }
+                                },
+                                child: const Text(
+                                  "Search",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                             ),
                           ],
@@ -160,7 +163,7 @@ class _ProjectsPageState extends State<ProjectsPage>
             },
           ),
           FutureBuilder<List<Project>>(
-            future: fetchUserProjects(request),
+            future: request.loggedIn ? fetchUserProjects(request) : null,
             builder:
                 (BuildContext context, AsyncSnapshot<List<Project>> snapshot) {
               List<Widget> children;

@@ -30,6 +30,16 @@ class _ProjectLikeButtonState extends State<ProjectLikeButton> {
   }
 
   @override
+  void didUpdateWidget(ProjectLikeButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    setState(() {
+      likeCount = widget.likeCount;
+      isLiked = widget.isLiked;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
 
