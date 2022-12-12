@@ -15,47 +15,84 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(13),
-      child: Container(
-        // padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(13),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0, 17),
-              blurRadius: 17,
-              spreadRadius: -23,
-              color: kShadowColor,
-            ),
-          ],
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // if you need this
+        side: BorderSide(
+          width: 2,
         ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: press(),
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: <Widget>[
-                  Spacer(),
-                  SvgPicture.asset(svgSrc),
-                  Spacer(),
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(fontSize: 15),
-                  )
-                ],
+      ),
+      child: InkWell(
+        splashColor: Colors.blue[100],
+        onTap: () {
+          press();
+        },
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                svgSrc,
+                height: 64,
+                width: 64,
+                fit: BoxFit.scaleDown,
               ),
-            ),
+              Expanded(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
     );
+    // return ClipRRect(
+    //   borderRadius: BorderRadius.circular(13),
+    //   child: Container(
+    //     // padding: EdgeInsets.all(20),
+    //     decoration: BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.circular(13),
+    //       boxShadow: [
+    //         BoxShadow(
+    //           offset: Offset(0, 17),
+    //           blurRadius: 17,
+    //           spreadRadius: -23,
+    //           color: kShadowColor,
+    //         ),
+    //       ],
+    //     ),
+    //     child: Material(
+    //       color: Colors.transparent,
+    //       child: InkWell(
+    //         onTap: press(),
+    //         child: Padding(
+    //           padding: const EdgeInsets.all(20.0),
+    //           child: Column(
+    //             children: <Widget>[
+    //               Spacer(),
+    //               SvgPicture.asset(svgSrc),
+    //               Spacer(),
+    //               Text(
+    //                 title,
+    //                 textAlign: TextAlign.center,
+    //                 style: Theme.of(context)
+    //                     .textTheme
+    //                     .headline6
+    //                     ?.copyWith(fontSize: 15),
+    //               )
+    //             ],
+    //           ),
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }

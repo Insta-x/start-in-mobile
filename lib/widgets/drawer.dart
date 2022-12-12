@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/pages/projects/projects_home.dart';
 import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
@@ -28,13 +29,13 @@ class _AppDrawerState extends State<AppDrawer> {
             // Menambahkan clickable menu
             ListTile(
               title: Row(
-                children: const [Text('Inforum')],
+                children: const [Text('Home')],
               ),
               onTap: () {
                 // Route menu ke halaman utama
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const InForum()),
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
                 );
               },
             ),
@@ -49,12 +50,24 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             ListTile(
-              title: const Text('StartIn Store'),
+              title: Row(
+                children: const [Text('Forum')],
+              ),
               onTap: () {
-                // Route menu ke halaman Shop
+                // Route menu ke halaman utama
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const InForum()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Events'),
+              onTap: () {
+                // Route menu ke halaman events
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => ShopPage()),
+                  MaterialPageRoute(builder: (context) => Events()),
                 );
               },
             ),
@@ -69,12 +82,12 @@ class _AppDrawerState extends State<AppDrawer> {
               },
             ),
             ListTile(
-              title: const Text('Events'),
+              title: const Text('Shop'),
               onTap: () {
-                // Route menu ke halaman events
+                // Route menu ke halaman Shop
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => Events()),
+                  MaterialPageRoute(builder: (context) => ShopPage()),
                 );
               },
             ),
