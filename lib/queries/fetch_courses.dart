@@ -13,7 +13,6 @@ class CoursesApi {
 
     for (var i in body) {
       if (i != null) {
-        print(i);
         dataCourse.add(AddedCourse.fromJson(i));
       }
     }

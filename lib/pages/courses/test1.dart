@@ -44,7 +44,6 @@ class _CoursesState extends State<Courses> {
                         ],
                       );
                     } else {
-                      print("masuk ke listview");
                       return ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
                           shrinkWrap: true,
@@ -52,13 +51,16 @@ class _CoursesState extends State<Courses> {
                           itemBuilder: (context, index) => GestureDetector(
                               onTap: () async {
                                 final course = courses[index];
-                                String? url = course.fields!.courseUrl; //belum setting url onTap
-                              },  child: Container(
+                                String? url = course.fields!
+                                    .courseUrl; //belum setting url onTap
+                              },
+                              child: Container(
                                   margin: const EdgeInsets.all(10),
                                   padding: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                     color: Color.fromARGB(0, 1, 1, 1),
-                                    borderRadius:BorderRadius.all(Radius.circular(20)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20)),
                                     border: Border(
                                         bottom: BorderSide(
                                             color: Color.fromARGB(0, 0, 0, 0),
@@ -82,7 +84,8 @@ class _CoursesState extends State<Courses> {
                                           ],
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Column(
                                               crossAxisAlignment:
@@ -91,7 +94,9 @@ class _CoursesState extends State<Courses> {
                                                   MainAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                    courses![index].fields!.courseName!,
+                                                    courses![index]
+                                                        .fields!
+                                                        .courseName!,
                                                     style: const TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
@@ -105,19 +110,12 @@ class _CoursesState extends State<Courses> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 0),
                                         )
-                                      ]
-                                    )
-                                  )
-                                )
-                              );
-                            }
-                          }
-                        }
-                      )
-                    )
-                  );
-                }
-              }
+                                      ]))));
+                    }
+                  }
+                })));
+  }
+}
 
                               
                       

@@ -41,10 +41,6 @@ class _EditProjectPageState extends State<EditProjectPage> {
         future: fetchProject(request, widget.projectId),
         builder: (BuildContext context, AsyncSnapshot<Project> snapshot) {
           if (snapshot.hasData) {
-            print(title);
-            print(description);
-            print(donationTarget);
-
             return Form(
               key: _editProjectFormKey,
               child: SingleChildScrollView(

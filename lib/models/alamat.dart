@@ -15,7 +15,5 @@ class Address {
 
   static saveAddress(Address newAddress) {
     addressList.add(newAddress);
-    print("monitor");
-    print(newAddress.city);
   }
 }

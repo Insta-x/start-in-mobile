@@ -31,9 +31,9 @@ class _ForumPageState extends State<ForumPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
-            title: const Text(
-          "inforum",
-          style: TextStyle(color: Colors.white),
+          title: const Text(
+            "inforum",
+            style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Color.fromARGB(255, 42, 170, 26),
         ),
@@ -120,7 +120,6 @@ class _ForumPageState extends State<ForumPage> {
                             // Menambahkan behavior saat data disimpan
                             onSaved: request.loggedIn
                                 ? (String? value) {
-                                    print("comment");
                                     setState(() {
                                       comment = value!;
                                     });
@@ -132,9 +131,7 @@ class _ForumPageState extends State<ForumPage> {
                                 {
                                   postComment(request, widget.data.pk, comment),
                                   _commentFormKey.currentState!.reset(),
-                                  print('validated')
                                 },
-                              print(' tidak validated')
                             },
                             validator: request.loggedIn
                                 ? (String? value) {
@@ -169,91 +166,88 @@ class _ForumPageState extends State<ForumPage> {
                           return ListView.builder(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (_, index) => InkWell(
-                                  child: Stack(
+                                      child: Stack(
                                     children: [
-                                      
                                       Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 10),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                width: 1.5,
-                                                color: Colors.grey)),
-                                      ),
-                                      child: 
-                                          Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              
-                                              Text(
-                                                  "${snapshot.data![index].fields.username}",
-                                                  style: const TextStyle(
-                                                      fontSize: 14.0,
-                                                      color: Color.fromARGB(
-                                                          255, 42, 41, 41),
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                              const SizedBox(height: 2),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                      "${snapshot.data![index].fields.timeCreated}",
-                                                      style: const TextStyle(
-                                                          fontSize: 12.0,
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              42,
-                                                              41,
-                                                              41))),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 12),
-                                              Text(
-                                                  "${snapshot.data![index].fields.comment}",
-                                                  style: const TextStyle(
-                                                      fontSize: 14.0,
-                                                      color: Colors.black))
-                                            ],
-                                          ),
-                                         
-                                        
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 10),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  width: 1.5,
+                                                  color: Colors.grey)),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                "${snapshot.data![index].fields.username}",
+                                                style: const TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Color.fromARGB(
+                                                        255, 42, 41, 41),
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            const SizedBox(height: 2),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    "${snapshot.data![index].fields.timeCreated}",
+                                                    style: const TextStyle(
+                                                        fontSize: 12.0,
+                                                        color: Color.fromARGB(
+                                                            255, 42, 41, 41))),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Text(
+                                                "${snapshot.data![index].fields.comment}",
+                                                style: const TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.black))
+                                          ],
+                                        ),
                                       ),
                                       Positioned(
-                                        top: 5,
-                                        right: 5,
-    
-                                        
-                                        child:  FutureBuilder(
-                                                  future: getUser(),
-                                                  builder: (context,
-                                                      AsyncSnapshot username) {
-                                                    if (request.loggedIn &&
-                                                        username.data ==
-                                                            snapshot
-                                                                .data![index]
-                                                                .fields
-                                                                .username) {
-                                                      return IconButton(
-                                                          onPressed: request.loggedIn ?(){
-                                                            deleteComment(request, widget.data.pk, snapshot.data![index].pk);
-                                                            
-                                                          } : null,
-                                                          icon: Icon(
-                                                              Icons.delete,
-                                                              size: 25,
-                                                              color:
-                                                                  Colors.red));
-                                                    } else {
-                                                      return const Text('');
-                                                    }
-                                                  }))],
+                                          top: 5,
+                                          right: 5,
+                                          child: FutureBuilder(
+                                              future: getUser(),
+                                              builder: (context,
+                                                  AsyncSnapshot username) {
+                                                if (request.loggedIn &&
+                                                    username.data ==
+                                                        snapshot.data![index]
+                                                            .fields.username) {
+                                                  return IconButton(
+                                                      onPressed:
+                                                          request.loggedIn
+                                                              ? () {
+                                                                  deleteComment(
+                                                                      request,
+                                                                      widget
+                                                                          .data
+                                                                          .pk,
+                                                                      snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .pk);
+                                                                }
+                                                              : null,
+                                                      icon: Icon(Icons.delete,
+                                                          size: 25,
+                                                          color: Colors.red));
+                                                } else {
+                                                  return const Text('');
+                                                }
+                                              }))
+                                    ],
                                   )));
                         }
                       }
