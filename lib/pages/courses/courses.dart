@@ -47,12 +47,12 @@ class _CoursesState extends State<Courses> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) => GestureDetector(
                           onTap: () async {
+
+                            // Mengambil Link URL
                             final course = courses[index];
                             String url = course.fields!.courseUrl!;
                             Uri linkUrl = Uri.parse(url);
-                            // ignore: deprecated_member_use
                             if (linkUrl.isAbsolute) {
-                              // ignore: deprecated_member_use
                               await launchUrl(linkUrl);
                             } else {
                               throw 'Could not launch url';
@@ -73,28 +73,13 @@ class _CoursesState extends State<Courses> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Judul Event
-                                Text(
+                                
+                                
+                                Text( //Mengambil Judul Course
                                   courses![index].fields!.courseName!,
                                   style: const TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                // Jarak line spacing
-                                Text(
-                                  "",
-                                  style: const TextStyle(
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                // Jadwal event
-                                Text(
-                                  courses![index].fields!.courseUrl!,
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.normal,
                                   ),
                                 ),
                               ],
@@ -102,6 +87,7 @@ class _CoursesState extends State<Courses> {
                           )));
                 }
               }
-            }));
+            })
+            );
   }
 }
