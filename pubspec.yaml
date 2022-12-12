@@ -61,10 +61,10 @@ dev_dependencies:
 flutter_application_id:
   android: 
     id: "com.example.start_in_mobile_android"
-    name: "StartIn - Android"
+    name: "StartIn"
   ios:
     id: "com.example.start_in_mobile_ios"
-    name: "StartIn - iOS"
+    name: "StartIn"
 flutter_icons:
 
 
