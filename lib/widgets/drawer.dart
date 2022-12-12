@@ -9,7 +9,6 @@ import 'package:start_in_mobile/pages/events/events.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/authentication/auth_logout.dart';
 
-
 class AppDrawer extends StatefulWidget {
   const AppDrawer({super.key});
 
@@ -23,80 +22,82 @@ class _AppDrawerState extends State<AppDrawer> {
     final request = context.watch<CookieRequest>();
 
     return Drawer(
-      child: Column(
-        children: [
-          // Menambahkan clickable menu
-          ListTile(
-            title: Row(
-              children: const [Text('Inforum')],
+      child: SafeArea(
+        child: Column(
+          children: [
+            // Menambahkan clickable menu
+            ListTile(
+              title: Row(
+                children: const [Text('Inforum')],
+              ),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const InForum()),
+                );
+              },
             ),
-            onTap: () {
-              // Route menu ke halaman utama
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const InForum()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Projects'),
-            onTap: () {
-              // Route menu ke halaman utama
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => ProjectsPage()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('StartIn Store'),
-            onTap: () {
-              // Route menu ke halaman Shop
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => ShopPage()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('News'),
-            onTap: () {
-              // Route menu ke halaman News
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => News()),
-              );
-            },
-          ),
-          ListTile(
-            title: const Text('Events'),
-            onTap: () {
-              // Route menu ke halaman events
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Events()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text(request.loggedIn ? 'Logout' : 'Login'),
-            onTap: () {
-              // Route menu ke halaman Shop
-              if (request.loggedIn) {
-                logout(request);
+            ListTile(
+              title: const Text('Projects'),
+              onTap: () {
+                // Route menu ke halaman utama
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => ProjectsPage()),
                 );
-              } else {
+              },
+            ),
+            ListTile(
+              title: const Text('StartIn Store'),
+              onTap: () {
+                // Route menu ke halaman Shop
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => ShopPage()),
                 );
-              }
-            },
-          ),
-        ],
+              },
+            ),
+            ListTile(
+              title: const Text('News'),
+              onTap: () {
+                // Route menu ke halaman News
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => News()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Events'),
+              onTap: () {
+                // Route menu ke halaman events
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Events()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text(request.loggedIn ? 'Logout' : 'Login'),
+              onTap: () {
+                // Route menu ke halaman Shop
+                if (request.loggedIn) {
+                  logout(request);
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
