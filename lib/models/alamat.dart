@@ -6,14 +6,16 @@ class Address {
 
   static List<Address> addressList = [];
 
-  Address(String street, String city, String province, String postal) {
-    street = street;
-    city = city;
-    province = province;
-    postal = postal;
+  Address(String st, String ci, String prov, String pos) {
+    street = st;
+    city = ci;
+    province = prov;
+    postal = pos;
   }
 
   static saveAddress(Address newAddress) {
     addressList.add(newAddress);
+    print("monitor");
+    print(newAddress.city);
   }
 }
