@@ -87,11 +87,27 @@ class _EventsState extends State<Events> {
                           fontWeight: FontWeight.normal,
                         ),
                       ),
+                      // Jarak line spacing
+                      Text(
+                        "",
+                        style: const TextStyle(
+                          fontSize: 3.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       // Lokasi event
                       Text(
                         "${snapshot.data![index].fields.location}",
                         style: const TextStyle(
                           fontSize: 12.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      // Jarak line spacing
+                      Text(
+                        "",
+                        style: const TextStyle(
+                          fontSize: 10.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
