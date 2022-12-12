@@ -2,6 +2,9 @@ import 'package:start_in_mobile/pages/shop/widgets/category.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/shop/screens/checkout.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:start_in_mobile/pages/authentication/login.dart';
 
 class ProductDetail extends StatelessWidget {
   final product;
@@ -9,6 +12,7 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Detail'),
@@ -66,14 +70,20 @@ class ProductDetail extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Route menuju halaman checkout
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: ((context) => Checkout(
-                        item: product,
-                      ))));
+        onPressed: () async {
+          // Route menuju halaman checkout jika user login
+          if (request.loggedIn) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: ((context) => Checkout(
+                          item: product,
+                        ))));
+          } else {
+            // Redirect ke login page
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: ((context) => LoginPage())));
+          }
         },
         child: Icon(
           Icons.shopping_cart,
