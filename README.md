@@ -1,7 +1,7 @@
 [![Build status](https://build.appcenter.ms/v0.1/apps/479a053c-1ee0-4a63-a23d-50d97b31308d/branches/main/badge)](https://appcenter.ms)
 [![Release](https://github.com/Insta-x/start-in-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/Insta-x/start-in-mobile/actions/workflows/release.yml)
 
-[Link Aplikasi Heroku](https://start-in.herokuapp.com/) 
+[Link Aplikasi StartIn](https://install.appcenter.ms/orgs/StartInMobile/apps/StartIn) 
 
 ## Anggota Kelompok
 1. Uttsada Jason
