@@ -6,32 +6,32 @@ List<News> forumFromJson(String str) =>
 String forumToJson(List<News> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
+// class News {
+//   News({
+//     required this.model,
+//     required this.pk,
+//     required this.fields,
+//   });
+
+//   String model;
+//   int pk;
+//   Fields fields;
+
+//   factory News.fromJson(Map<String, dynamic> json) => News(
+//         model: json["model"],
+//         pk: json["pk"],
+//         fields: Fields.fromJson(json["fields"]),
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "model": model,
+//         "pk": pk,
+//         "fields": fields.toJson(),
+//       };
+// }
+
 class News {
   News({
-    required this.model,
-    required this.pk,
-    required this.fields,
-  });
-
-  String model;
-  int pk;
-  Fields fields;
-
-  factory News.fromJson(Map<String, dynamic> json) => News(
-        model: json["model"],
-        pk: json["pk"],
-        fields: Fields.fromJson(json["fields"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "model": model,
-        "pk": pk,
-        "fields": fields.toJson(),
-      };
-}
-
-class Fields {
-  Fields({
     required this.title,
     required this.description,
     required this.url,
@@ -41,7 +41,7 @@ class Fields {
   String description;
   String url;
 
-  factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+  factory News.fromJson(Map<String, dynamic> json) => News(
         title: json["title"],
         description: json["description"],
         url: json["url"],

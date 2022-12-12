@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:start_in_mobile/models/Forum.dart';
-import 'package:start_in_mobile/queries/post_comment.dart';
+import 'package:start_in_mobile/queries/inforum/delete_comment.dart';
+import 'package:start_in_mobile/queries/inforum/post_comment.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
-import 'package:start_in_mobile/queries/get_all_comment.dart';
+import 'package:start_in_mobile/queries/inforum/get_all_comment.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
@@ -18,15 +20,23 @@ class ForumPage extends StatefulWidget {
 class _ForumPageState extends State<ForumPage> {
   final _commentFormKey = GlobalKey<FormState>();
   String comment = '';
+
+  Future<String> getUser() async {
+    var ref = await SharedPreferences.getInstance();
+    return ref.getString('username') ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
-            title: const Text(
-          "inforum",
-          style: TextStyle(color: Colors.white),
-        )),
+          title: const Text(
+            "inforum",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Color.fromARGB(255, 42, 170, 26),
+        ),
         drawer: const AppDrawer(),
         body: Container(
           color: Colors.white,
@@ -110,7 +120,6 @@ class _ForumPageState extends State<ForumPage> {
                             // Menambahkan behavior saat data disimpan
                             onSaved: request.loggedIn
                                 ? (String? value) {
-                                    print("comment");
                                     setState(() {
                                       comment = value!;
                                     });
@@ -118,12 +127,11 @@ class _ForumPageState extends State<ForumPage> {
                                 : null,
                             // Validator sebagai validasi form
                             onFieldSubmitted: (value) => {
-                              if (_commentFormKey.currentState!.validate()){
-                                postComment(request, widget.data.pk, comment),
-                                _commentFormKey.currentState!.reset(),
-                                print('validated')
-                              },
-                              print(' tidak validated')
+                              if (_commentFormKey.currentState!.validate())
+                                {
+                                  postComment(request, widget.data.pk, comment),
+                                  _commentFormKey.currentState!.reset(),
+                                },
                             },
                             validator: request.loggedIn
                                 ? (String? value) {
@@ -133,7 +141,6 @@ class _ForumPageState extends State<ForumPage> {
                                     return null;
                                   }
                                 : null,
-                            
                           ),
                         ),
                       ])),
@@ -159,49 +166,88 @@ class _ForumPageState extends State<ForumPage> {
                           return ListView.builder(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (_, index) => InkWell(
-                                      child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 4, vertical: 10),
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border(
-                                          bottom: BorderSide(
-                                              width: 1.5, color: Colors.grey)),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            "${snapshot.data![index].fields.username}",
-                                            style: const TextStyle(
-                                                fontSize: 14.0,
-                                                color: Color.fromARGB(
-                                                    255, 42, 41, 41),
-                                                fontWeight: FontWeight.bold)),
-                                        const SizedBox(height: 2),
-                                        Row(
+                                      child: Stack(
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 10),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  width: 1.5,
+                                                  color: Colors.grey)),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                                "${snapshot.data![index].fields.timeCreated}",
+                                                "${snapshot.data![index].fields.username}",
                                                 style: const TextStyle(
-                                                    fontSize: 12.0,
+                                                    fontSize: 14.0,
                                                     color: Color.fromARGB(
-                                                        255, 42, 41, 41))),
+                                                        255, 42, 41, 41),
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            const SizedBox(height: 2),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    "${snapshot.data![index].fields.timeCreated}",
+                                                    style: const TextStyle(
+                                                        fontSize: 12.0,
+                                                        color: Color.fromARGB(
+                                                            255, 42, 41, 41))),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 12),
+                                            Text(
+                                                "${snapshot.data![index].fields.comment}",
+                                                style: const TextStyle(
+                                                    fontSize: 14.0,
+                                                    color: Colors.black))
                                           ],
                                         ),
-                                        const SizedBox(height: 12),
-                                        Text(
-                                            "${snapshot.data![index].fields.comment}",
-                                            style: const TextStyle(
-                                                fontSize: 14.0,
-                                                color: Colors.black))
-                                      ],
-                                    ),
+                                      ),
+                                      Positioned(
+                                          top: 5,
+                                          right: 5,
+                                          child: FutureBuilder(
+                                              future: getUser(),
+                                              builder: (context,
+                                                  AsyncSnapshot username) {
+                                                if (request.loggedIn &&
+                                                    username.data ==
+                                                        snapshot.data![index]
+                                                            .fields.username) {
+                                                  return IconButton(
+                                                      onPressed:
+                                                          request.loggedIn
+                                                              ? () {
+                                                                  deleteComment(
+                                                                      request,
+                                                                      widget
+                                                                          .data
+                                                                          .pk,
+                                                                      snapshot
+                                                                          .data![
+                                                                              index]
+                                                                          .pk);
+                                                                }
+                                                              : null,
+                                                      icon: Icon(Icons.delete,
+                                                          size: 25,
+                                                          color: Colors.red));
+                                                } else {
+                                                  return const Text('');
+                                                }
+                                              }))
+                                    ],
                                   )));
                         }
                       }

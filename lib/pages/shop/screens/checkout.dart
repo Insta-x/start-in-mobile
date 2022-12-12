@@ -19,6 +19,7 @@ class _CheckoutState extends State<Checkout> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Choose Address'),
+        backgroundColor: Color.fromARGB(255, 209, 223, 12),
       ),
       drawer: AppDrawer(),
       body: SingleChildScrollView(
@@ -46,7 +47,7 @@ class _CheckoutState extends State<Checkout> {
             padding: EdgeInsets.all(16.0),
             child: TextButton(
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.blue),
+                backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 209, 223, 12)),
               ),
               onPressed: () {
                 Navigator.pushReplacement(context,
@@ -54,7 +55,7 @@ class _CheckoutState extends State<Checkout> {
               },
               child: const Text(
                 'Add New Address',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white, backgroundColor: Color.fromARGB(255, 209, 223, 12)),
               ),
             ),
           ),
@@ -62,7 +63,8 @@ class _CheckoutState extends State<Checkout> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text("Back"),
+            child: Text("Back",
+            style: TextStyle(color: Color.fromARGB(255, 209, 223, 12))),
           ),
         ],
       ),

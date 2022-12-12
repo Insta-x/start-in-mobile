@@ -24,6 +24,7 @@ class _DonateProjectPageState extends State<DonateProjectPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Donate'),
+        backgroundColor: Color.fromARGB(255, 10, 13, 170),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {

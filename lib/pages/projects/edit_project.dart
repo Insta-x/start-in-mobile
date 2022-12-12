@@ -29,6 +29,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit'),
+        backgroundColor: Color.fromARGB(255, 10, 13, 170),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -40,10 +41,6 @@ class _EditProjectPageState extends State<EditProjectPage> {
         future: fetchProject(request, widget.projectId),
         builder: (BuildContext context, AsyncSnapshot<Project> snapshot) {
           if (snapshot.hasData) {
-            title = snapshot.data!.title;
-            description = snapshot.data!.description;
-            donationTarget = snapshot.data!.donationTarget;
-
             return Form(
               key: _editProjectFormKey,
               child: SingleChildScrollView(
@@ -64,9 +61,9 @@ class _EditProjectPageState extends State<EditProjectPage> {
                           ),
                         ),
                         // Menambahkan behavior saat nama diketik
-                        onChanged: (String? value) {
-                          title = value!;
-                        },
+                        // onChanged: (String? value) {
+                        //   title = value!;
+                        // },
                         // Menambahkan behavior saat data disimpan
                         onSaved: (String? value) {
                           title = value!;
@@ -96,9 +93,9 @@ class _EditProjectPageState extends State<EditProjectPage> {
                           ),
                         ),
                         // Menambahkan behavior saat nama diketik
-                        onChanged: (String? value) {
-                          description = value!;
-                        },
+                        // onChanged: (String? value) {
+                        //   description = value!;
+                        // },
                         // Menambahkan behavior saat data disimpan
                         onSaved: (String? value) {
                           description = value!;
@@ -131,11 +128,11 @@ class _EditProjectPageState extends State<EditProjectPage> {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         // Menambahkan behavior saat nama diketik
-                        onChanged: (String? value) {
-                          if (int.tryParse(value!) != null) {
-                            donationTarget = int.parse(value);
-                          }
-                        },
+                        // onChanged: (String? value) {
+                        //   if (int.tryParse(value!) != null) {
+                        //     donationTarget = int.parse(value);
+                        //   }
+                        // },
                         // Menambahkan behavior saat data disimpan
                         onSaved: (String? value) {
                           if (int.tryParse(value!) != null) {
@@ -162,6 +159,7 @@ class _EditProjectPageState extends State<EditProjectPage> {
                           ),
                           onPressed: () async {
                             if (_editProjectFormKey.currentState!.validate()) {
+                              _editProjectFormKey.currentState!.save();
                               await editProject(request, widget.projectId,
                                       title, description, donationTarget)
                                   .then((value) => Navigator.pop(context));

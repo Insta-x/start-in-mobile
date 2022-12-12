@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
         drawer: const AppDrawer(),
         appBar: AppBar(
           title: const Text("StartIn Shop"),
+          backgroundColor: Color.fromARGB(255, 209, 223, 12),
         ),
         body: Container(
           margin: EdgeInsets.fromLTRB(15, 15, 15, 7),

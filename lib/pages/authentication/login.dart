@@ -4,7 +4,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:start_in_mobile/pages/authentication/register.dart';
 import 'package:start_in_mobile/pages/home.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
-import 'package:start_in_mobile/queries/auth_login.dart';
+import 'package:start_in_mobile/queries/authentication/auth_login.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Login'),
+          backgroundColor: Color.fromARGB(255, 207, 85, 13),
         ),
         drawer: AppDrawer(),
         body: Padding(
@@ -46,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text(
                           'StartIn',
                           style: TextStyle(
-                              color: Colors.blue,
+                              color: Color.fromARGB(255, 207, 85, 13),
                               fontWeight: FontWeight.w500,
                               fontSize: 30),
                         )),
@@ -118,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: const Text(
                         'Forgot Password',
+                        style: TextStyle(color: Color.fromARGB(255, 207, 85, 13),),
                       ),
                     ),
                     Container(
@@ -125,6 +127,8 @@ class _LoginPageState extends State<LoginPage> {
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: ElevatedButton(
                           child: const Text('Login'),
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 207, 85, 13),),
                           onPressed: () async {
                             if (_loginFormKey.currentState!.validate()) {
                               if (await login(request, username, password1)) {
@@ -145,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                         TextButton(
                           child: const Text(
                             'Register',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, color: Color.fromARGB(255, 207, 85, 13),),
                           ),
                           onPressed: () {
                             Navigator.push(

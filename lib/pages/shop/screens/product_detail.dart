@@ -16,6 +16,7 @@ class ProductDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Detail'),
+        backgroundColor: Color.fromARGB(255, 209, 223, 12),
       ),
       drawer: const AppDrawer(),
       body: Column(
@@ -93,10 +94,13 @@ class ProductDetail extends StatelessWidget {
         margin: const EdgeInsets.fromLTRB(7, 7, 7, 15),
         width: double.infinity,
         child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+          backgroundColor: Color.fromARGB(255, 209, 223, 12)),
           onPressed: () {
             Navigator.pop(context);
           },
           child: const Text('Back'),
+          
         ),
       ),
     );

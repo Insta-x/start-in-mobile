@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:start_in_mobile/pages/inforum/forum.dart';
 import 'package:start_in_mobile/pages/inforum/widgets/forumForm.dart';
 import 'package:start_in_mobile/pages/inforum/widgets/forumModal.dart';
-import 'package:start_in_mobile/queries/get_all_forum.dart';
+import 'package:start_in_mobile/queries/inforum/get_all_forum.dart';
 import 'package:start_in_mobile/widgets/drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +35,7 @@ class _InForumState extends State<InForum> {
             "inforum",
             style: TextStyle(color: Colors.white),
           ),
+          backgroundColor: Color.fromARGB(255, 42, 170, 26),
         ),
         drawer: const AppDrawer(),
         floatingActionButton:  FloatingActionButton(

@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:start_in_mobile/models/news.dart';
+import 'package:start_in_mobile/models/Comment.dart';
 
-Future<List<News>> get_all_news() async {
-  var url = Uri.parse('https://start-in.up.railway.app/news/json/');
+Future<List<Comment>> get_all_comment(int forum_id) async {
+  var url = Uri.parse(
+      'https://start-in.up.railway.app/inforum/forum/comment/${forum_id}');
   var response = await http.get(
     url,
     headers: {
@@ -15,12 +16,13 @@ Future<List<News>> get_all_news() async {
   // melakukan decode response menjadi bentuk json
   var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-  // melakukan konversi data json menjadi object News
-  List<News> news = [];
+  // melakukan konversi data json menjadi object Comment
+  List<Comment> forums = [];
   for (var d in data) {
     if (d != null) {
-      news.add(News.fromJson(d));
+      forums.add(Comment.fromJson(d));
     }
   }
-  return news;
+
+  return forums;
 }
