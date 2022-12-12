@@ -7,6 +7,7 @@ import 'package:start_in_mobile/pages/inforum/inforum.dart';
 import 'package:start_in_mobile/pages/shop/shop.dart';
 import 'package:start_in_mobile/pages/news/news.dart';
 import 'package:start_in_mobile/pages/events/events.dart';
+import 'package:start_in_mobile/pages/courses/courses.dart';
 import 'package:start_in_mobile/pages/authentication/login.dart';
 import 'package:start_in_mobile/queries/authentication/auth_logout.dart';
 
@@ -68,6 +69,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Events()),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Courses'),
+              onTap: () {
+                // Route menu ke halaman utama
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Courses()),
                 );
               },
             ),
